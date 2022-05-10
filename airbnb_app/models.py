@@ -31,6 +31,7 @@ class PropertyCategory(models.Model):
     class Meta:
         verbose_name = 'Property Category'
         verbose_name_plural = 'Property Categories'
+        
     
     def __str__(self):
         return self.title
