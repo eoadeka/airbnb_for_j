@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'airbnb_app.apps.AirbnbAppConfig',
-    'corsheaders'
+    'corsheaders',
     'rest_framework',
     'frontend.apps.FrontendConfig'
 ]
