@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'airbnb_app.apps.AirbnbAppConfig',
+    'amenities.apps.AmenitiesConfig',
     'corsheaders',
     'rest_framework',
     'frontend.apps.FrontendConfig'
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'airbnb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'airbnbDB',
+        'NAME': 'airbnbDB2',
         'USER': 'postgres',
         'PASSWORD': 'november1899',
         'HOST': 'localhost',
@@ -133,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
