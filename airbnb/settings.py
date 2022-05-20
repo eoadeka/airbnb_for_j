@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import frontend
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts.apps.AccountsConfig',
     'airbnb_app.apps.AirbnbAppConfig',
     'amenities.apps.AmenitiesConfig',
     'corsheaders',
@@ -53,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.contrib.staticfiles.finders.FileSystemFinder',
+    # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'corsheaders.middleware.CorsMiddleware',
 ]
 
@@ -75,6 +79,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'airbnb.wsgi.application'
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_RENDERER_CLASSES': (
+#         'rest_framework.renderers.JSONRenderer',
+#     )
+# }
 
 
 # Database
@@ -125,7 +135,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '/Users/emmanuellaadeka/Documents/PROJECTS/my_projects/johnAirbnb/john_airbnb/frontend/static/'),
+]
+# john_airbnb/frontend/static
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -136,6 +151,21 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MEDIA_URL = "/images/" #edited
+MEDIA_ROOT = os.path.join(BASE_DIR, '/Users/emmanuellaadeka/Documents/PROJECTS/my_projects/johnAirbnb/john_airbnb/frontend/static/')
+
+# FRONTEND_PATH = os.path.dir
+
+# REACT_DIR = os.environ.get('REACT_DIR','/Users/emmanuellaadeka/Documents/PROJECTS/my_projects/johnAirbnb/john_airbnb/frontend/')
+# REACT_ROOT_URL_FILES = os.environ.get("REACT_ROOT_URL_FILES",'favicon.png manifest.json robots.txt').split(" ")
+
+# STATIC_URL = f'/{os.environ.get("STATIC_URL","static")}/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_DIRS = [
+#     #...
+#     os.path.join(REACT_DIR,'static', 'images')
+#     # os.path.join(REACT_DIR,'build','static')
+# ]

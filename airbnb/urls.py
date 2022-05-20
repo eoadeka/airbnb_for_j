@@ -15,19 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings
 from django.conf.urls.static import static
+from django.conf import settings
 from rest_framework import routers
 from airbnb_app import views
 
 router = routers.DefaultRouter()
+router.register(r'cities', views.CitiesView, 'city')
 router.register(r'properties', views.PropertiesView, 'property')
 router.register(r'propertyImages', views.PropertyImagesView, 'propertyImages')
+# urlpatterns = router.urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('', include('frontend.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('airbnb/', include('airbnb_app.urls')),
     path('amenities/', include('amenities.urls')),
-    path('', include('frontend.urls'))
+# ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# if settings.DEBUG:
+#     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
