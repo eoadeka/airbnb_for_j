@@ -1,7 +1,8 @@
-from email.mime import image
-from tabnanny import verbose
 from django.db import models
+# from django.forms import SlugField
 from amenities.models import *
+
+# TESTING with coverage
 
 # Create your models here.
 # class booking: check-in, check-out, no of beds, no. of guests
@@ -28,9 +29,11 @@ PROPERTY_TYPE_CHOICES = [
 # --------------------- PROPERTY RELATED -------------------------
 class City(models.Model):
     city = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=250,unique=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Cities'
+        ordering = ['id']
 
     def __str__(self):
         return self.city
@@ -67,7 +70,7 @@ class PropertyCategory(models.Model):
 class Property(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     type = models.ForeignKey(PropertyCategory, on_delete=models.CASCADE, related_name='properties')
-    image = models.FileField(blank=True, upload_to="property")
+    image = models.FileField(blank=True, upload_to="images/properties")
     title = models.CharField(max_length=1000)
     slug = models.SlugField(max_length=250,unique=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -93,7 +96,7 @@ class Property(models.Model):
     services = models.ManyToManyField(Services, blank=True)
 
     class Meta:
-        ordering = ('title',)
+        ordering = ('id',)
         verbose_name_plural = 'Properties'
     
     def __str__(self):
@@ -102,7 +105,7 @@ class Property(models.Model):
 
 class PropertyImages(models.Model):
     property = models.ForeignKey(Property,default=None, on_delete=models.CASCADE)
-    images = models.FileField(upload_to="property")
+    images = models.FileField(upload_to="images/properties")
 
     class Meta:
         verbose_name_plural = 'Property Images'
