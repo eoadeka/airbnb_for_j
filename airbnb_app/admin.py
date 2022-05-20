@@ -15,6 +15,9 @@ from amenities.models import *
 
 
 # PROPERTIES-RELATED ADMINS
+class CityAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ['city']}
+
 class PropertyImagesAdmin(admin.StackedInline):
     model = PropertyImages
     
@@ -36,7 +39,7 @@ class PropertyCategoryAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(City)
+admin.site.register(City, CityAdmin)
 admin.site.register(Highlights)
 admin.site.register(PropertyImages, PropertyImagesAdmin)
 admin.site.register(Property, PropertyAdmin)
