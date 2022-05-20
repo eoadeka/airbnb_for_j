@@ -1,1 +1,7 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: auto;
+  padding: auto;
+}
+/*# sourceMappingURL=main.css.map */
