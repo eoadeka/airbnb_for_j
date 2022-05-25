@@ -33,13 +33,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',
     'airbnb_app.apps.AirbnbAppConfig',
     'amenities.apps.AmenitiesConfig',
     'corsheaders',
@@ -81,6 +81,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'airbnb.wsgi.application'
 
 # REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
 #     'DEFAULT_RENDERER_CLASSES': (
 #         'rest_framework.renderers.JSONRenderer',
 #     )
@@ -93,7 +96,7 @@ WSGI_APPLICATION = 'airbnb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'airbnbDB2',
+        'NAME': 'airbnbDB3',
         'USER': 'postgres',
         'PASSWORD': 'november1899',
         'HOST': 'localhost',
@@ -138,7 +141,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '/Users/emmanuellaadeka/Documents/PROJECTS/my_projects/johnAirbnb/john_airbnb/frontend/static/'),
+    os.path.join(BASE_DIR, 'frontend/static/'),
 ]
 # john_airbnb/frontend/static
 
@@ -146,6 +149,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Use User model as the AUTH_USER_MODEL
+AUTH_USER_MODEL = 'accounts.User'
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
@@ -155,7 +161,10 @@ CORS_ORIGIN_WHITELIST = [
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = "/images/" #edited
-MEDIA_ROOT = os.path.join(BASE_DIR, '/Users/emmanuellaadeka/Documents/PROJECTS/my_projects/johnAirbnb/john_airbnb/frontend/static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/static/')
+
+
+LOGIN_URL='/admin/login/'
 
 # FRONTEND_PATH = os.path.dir
 
