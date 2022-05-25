@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withUrlParams } from "../../utils/urlParams";
 import { Link } from "react-router-dom";
 
+
 class City extends Component{
     constructor(props){
         super(props);
@@ -33,14 +34,14 @@ class City extends Component{
         const {cities, properties } = this.state;
 
         return(
-            <div>
-                <h1>City</h1>
+            <div className="city_body">
                 {cities.filter((city) => city.slug == slug).map((city) => (
                     <div key={city.id}>
+                        <h1>{city.city}</h1>
                         {properties.filter((property) => city.city == property.city).map(property => (
                             <div key={property.id}>
                                 <Link to={{ pathname: `/properties/${property.id}/${property.slug}`}}>
-                                    <p>{property.title}</p>
+                                    <h2>{property.title}</h2>
                                     <img src={property.image} alt={property.title} width="200"></img>
                                     <p>{property.description}</p>
                                     <br></br>

@@ -23,7 +23,7 @@ export default class Cities extends Component{
     
     render(){
         return(
-            <div>
+            <div className="cities_body">
                 <h1>Cities</h1>
                 {this.state.citiesList.map((cities, index) =>(
                     <div key={index}>

@@ -40,19 +40,19 @@ import axios from "axios";
         const {propertyItem, propertyImagesList } = this.state;
         
         return(
-            <div>
-                <h1>Property</h1>
+            <div className="property_body">
+                <p>Property Page</p>
 
-                {id}
+                {/* {id} */}
                 {/* {slug} */}
 
                 {propertyItem.filter((property) => property.id == id).map((property) => (
                     <div key={property.id}>
-                        <img src={property.image} alt={property.title} width="200"></img>
-                        <p>Title : {property.title}</p>
+                        <h1>{property.title}</h1>
+                        <img src={property.image} alt={property.title} width="100%" height="500px"></img>
                         <p>Type : {property.type}</p>
                         <p>City : {property.city}</p>
-                        <p>Description : {property.description}</p>
+                        <p>Highlights : {property.highlights}</p>
                         <p>Description: {property.description}</p>
                         <p>Bathroom: {property.bathroom.map((bathroom, index) => (
                             <li key={index}>{bathroom}</li>
