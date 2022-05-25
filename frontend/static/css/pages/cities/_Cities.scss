@@ -1,0 +1,19 @@
+.cities_body{
+    
+    div{
+
+        a{
+            text-decoration: none;
+            // text-decoration: inherit;
+            color: black;
+            font-family: $headerFont;
+
+            &:hover{
+                color: pink;
+                text-decoration: line-through;
+                // text-decoration: dashedß;
+                // text-decoration: underline dashed blue 1px;
+            }
+        }
+    }
+}

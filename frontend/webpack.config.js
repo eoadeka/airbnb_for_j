@@ -1,3 +1,4 @@
+// import css from "file.css";
 const path = require("path");
 const webpack = require("webpack");
 
@@ -15,6 +16,10 @@ module.exports = {
         use: {
           loader: "babel-loader",
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

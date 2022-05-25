@@ -1,0 +1,21 @@
+.properties_body{
+    
+    div{
+
+        div{
+            a{
+                text-decoration: none;
+                // text-decoration: inherit;
+                color: black;
+    
+
+            }
+
+            &:hover{
+                    
+                background-color: pink;
+                
+            }
+        }
+    }
+}

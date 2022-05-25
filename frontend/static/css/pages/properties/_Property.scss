@@ -1,0 +1,14 @@
+.property_body{
+    backdrop-filter: blur(20px);
+
+    div{
+        
+        margin: 2em;
+       
+        img{
+            filter: grayscale(50%);
+        }
+
+
+    }
+}

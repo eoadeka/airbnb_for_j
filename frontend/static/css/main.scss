@@ -1,5 +1,43 @@
-*{
-    box-sizing: border-box;
-    margin: auto;
-    padding: auto;
+@import './config/config';
+@import './config/variables';
+@import './pages/cities/City'; 
+@import './pages/cities/Cities'; 
+@import './pages/properties/Property';
+@import './pages/properties/Properties';
+
+html, body{
+    margin: 0;
+    padding: 0;
+    // font-family: 'Cormorant Garamond', serif;
+    // font-family: 'PT Serif', serif;
+    // font-family: 'Syne', sans-serif;
+    // font-family: 'Space Grotesk', sans-serif;
+    // font-family: 'Ultra', serif;
+}
+
+h1{
+    font-family: $headerFont;
+    font-size: 6em;
+    overflow-wrap: break-word;
+    // font-size: 100em;
+    // font-family: 'Space Grotesk', sans-serif;
+    // font-family: 'Ultra', serif;
+}
+
+h2{
+    font-family: 'Syne', sans-serif;
+    font-size: 4em;
+    overflow-wrap: break-word;
+}
+
+p{
+    // font-family: 'Cormorant Garamond', serif;
+    font-family: 'Fahkwang', sans-serif;
+    // font-size: 10em;
+    // font-family: 'Space Grotesk', sans-serif;
+}
+
+img{
+    object-fit: cover;
+    object-position: top;
 }

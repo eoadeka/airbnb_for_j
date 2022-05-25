@@ -1,0 +1,29 @@
+.city_body{
+    backdrop-filter: blur(20px);
+
+    div{
+        
+
+        div{
+            margin: 2em;
+            a{
+                color: inherit;
+                text-decoration: inherit;
+                
+                img{
+                    filter: grayscale(50%);
+                }
+
+                
+            }
+
+            &:hover{
+                img{
+                    filter: initial;
+                }
+
+                background-color: aquamarine;
+            }
+        }
+    }
+}

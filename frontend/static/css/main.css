@@ -4,4 +4,94 @@
   margin: auto;
   padding: auto;
 }
+
+.city_body {
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+}
+
+.city_body div div {
+  margin: 2em;
+}
+
+.city_body div div a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.city_body div div a img {
+  -webkit-filter: grayscale(50%);
+          filter: grayscale(50%);
+}
+
+.city_body div div:hover {
+  background-color: aquamarine;
+}
+
+.city_body div div:hover img {
+  -webkit-filter: initial;
+          filter: initial;
+}
+
+.cities_body div a {
+  text-decoration: none;
+  color: black;
+  font-family: "Syne", sans-serif;
+}
+
+.cities_body div a:hover {
+  color: pink;
+  text-decoration: line-through;
+}
+
+.property_body {
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+}
+
+.property_body div {
+  margin: 2em;
+}
+
+.property_body div img {
+  -webkit-filter: grayscale(50%);
+          filter: grayscale(50%);
+}
+
+.properties_body div div a {
+  text-decoration: none;
+  color: black;
+}
+
+.properties_body div div:hover {
+  background-color: pink;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: "Syne", sans-serif;
+  font-size: 6em;
+  overflow-wrap: break-word;
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 4em;
+  overflow-wrap: break-word;
+}
+
+p {
+  font-family: 'Fahkwang', sans-serif;
+}
+
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
 /*# sourceMappingURL=main.css.map */
