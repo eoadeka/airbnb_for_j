@@ -13,4 +13,8 @@ urlpatterns = [
     path('cities/<slug:slug>', index),
     path('properties', index),
     path('properties/<str:id>/<slug:slug>', index),
+
+    path('login', index),
+    path('register', index),
+    path('profile', index)
 ]
