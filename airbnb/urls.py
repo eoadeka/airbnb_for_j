@@ -17,26 +17,28 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from rest_framework import routers
+from accounts import views
 from airbnb_app import views
 
-router = routers.DefaultRouter()
-router.register(r'cities', views.CitiesView, 'city')
-router.register(r'properties', views.PropertiesView, 'property')
-router.register(r'propertyImages', views.PropertyImagesView, 'propertyImages')
+
 # urlpatterns = router.urls + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# handler404 = 'airbnb_app.views.handler404'
+# handler500 = 'airbnb_app.views.my_custom_error_view'
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include(('airbnb.routers', 'airbnb'), namespace='airbnb_api')),
     path('', include('frontend.urls')),
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('airbnb/', include('airbnb_app.urls')),
     path('amenities/', include('amenities.urls')),
-# ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-# if settings.DEBUG:
+if settings.DEBUG:
 #     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
