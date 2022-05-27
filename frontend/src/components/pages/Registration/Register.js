@@ -10,7 +10,7 @@ export default class Register extends Component{
         return(
             <div>
                 <h1>Register</h1>
-                <p>You are registered</p>
+                <p>Register here</p>
             </div>
         )
     }

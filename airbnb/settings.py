@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
-import frontend
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,20 +30,44 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # existing backend
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # apps
     'airbnb_app.apps.AirbnbAppConfig',
     'amenities.apps.AmenitiesConfig',
+    'frontend.apps.FrontendConfig',
+
+    # corsheaders
     'corsheaders',
+
+    #django rest framework
     'rest_framework',
-    'frontend.apps.FrontendConfig'
+    'rest_framework.authtoken',
+    
+    # social login
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    
+    # the social providers
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.twitter',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +96,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'social_django.context_processors.backends', #add
+                # 'social_django.context_processors.login_redirect', #add
             ],
         },
     },
@@ -134,6 +159,26 @@ USE_I18N = True
 
 USE_TZ = True
 
+SITE_ID = 1
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'none' #email verification
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGOUT_ON_GET = True #logs out user directly by GET request
+
+# REST_AUTH_SERIALIZERS = {
+#     'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
+#     'PASSWORD_RESET_SERIALIZER': 'accounts.serializers.CustomPasswordResetSerializer',
+# }
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.UserRegisterSerializer',
+}
+
+ACCOUNT_FORMS = {'signup': 'accounts.forms.UserCreationForm'}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -154,7 +199,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    "http://127.0.0.1:3000"
 ]
 
 # MEDIA_URL = '/media/'
@@ -164,7 +210,9 @@ MEDIA_URL = "/images/" #edited
 MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/static/')
 
 
-LOGIN_URL='/admin/login/'
+LOGIN_URL='http://127.0.0.1:8000/login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # FRONTEND_PATH = os.path.dir
 
@@ -178,3 +226,5 @@ LOGIN_URL='/admin/login/'
 #     os.path.join(REACT_DIR,'static', 'images')
 #     # os.path.join(REACT_DIR,'build','static')
 # ]
+
+# google

@@ -10,7 +10,7 @@ export default class Login extends Component{
         return(
             <div>
                 <h1>Login</h1>
-                <p>You are logged in</p>
+                <p>Log in here</p>
             </div>
         )
     }
