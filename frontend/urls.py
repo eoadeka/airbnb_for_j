@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # re_path(r".*", index),
-    path('', index),
+    path('', index, name='home'),
     path('about', index),
     path('cities', index),
     path('cities/<slug:slug>', index),
