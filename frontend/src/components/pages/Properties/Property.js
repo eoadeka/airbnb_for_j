@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withUrlParams } from "../../utils/urlParams";
+import { withUrlParams } from "../../../utils/urlParams";
 import axios from "axios";
 // import { useParams } from "react-router-dom";
 // import propertiesList from "./Properties";
@@ -58,11 +58,17 @@ import axios from "axios";
                             <li key={index}>{bathroom}</li>
                         ))}</p>
                         <p>Bedroom: {property.bedroom.length == 0 ?  'Sorry, no amenities available' : property.bedroom}</p>
-                        <p>Availability: {property.is_available.toString()}</p>
+                        <p>Available: {property.is_available.toString()}</p>
                         <br></br>
                         <hr></hr>
                         <br></br>
                         <h1>Property Images</h1>
+                        <div>{property.property_images.map((property_image, index) => (
+                            <div key={index}>
+                                <img src={property_image.images} alt={property.title} width="200" />
+                            </div>
+                        ))}</div>
+                        
                         {propertyImagesList.filter((propertyImage) => propertyImage.property === property.title).map((image) => (
                             <div key={image.id}>
                                 {/* <p>{image.property}</p> */}

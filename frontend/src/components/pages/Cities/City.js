@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { withUrlParams } from "../../utils/urlParams";
+import { withUrlParams } from "../../../utils/urlParams";
 import { Link } from "react-router-dom";
 
 
