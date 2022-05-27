@@ -3,10 +3,10 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from .models import User
 # from .forms import *
-# from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 
 
-# admin.site.unregister(User)
+User = get_user_model()
 # Register your models here.
 class UserAdmin(BaseUserAdmin):
     """Define admin model for custom User model with no email field."""
@@ -16,6 +16,7 @@ class UserAdmin(BaseUserAdmin):
         ('Personal Info', {'fields': (
             'firstname',
             'lastname',
+            'avatar'
         )}),
         ('Permissions', {'fields' : (
             'is_active',
@@ -38,7 +39,7 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ('groups', 'user_permissions',)
     ordering = ('email',)
 
-# User = get_user_model()
+# 
 
 
 admin.site.register(User, UserAdmin)
