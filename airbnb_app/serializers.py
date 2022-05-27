@@ -12,27 +12,33 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields =  '__all__'
 
+
+
 class PropertySerializer(serializers.ModelSerializer):
 
-    city = serializers.StringRelatedField(many=False)
-    type = serializers.StringRelatedField(many=False)
-    highlights = serializers.StringRelatedField(many=True)
+    # city = serializers.StringRelatedField(many=False)
+    city = serializers.SlugRelatedField(many=False, slug_field='city', queryset=City.objects.all())
+    type = serializers.SlugRelatedField(many=False, slug_field='title', queryset=PropertyCategory.objects.all())
+    highlights = serializers.SlugRelatedField(many=True, slug_field='highlight', queryset=Highlights.objects.all())
 
-    attractions = serializers.StringRelatedField(many=True)
-    bathroom = serializers.StringRelatedField(many=True)
-    bedroom = serializers.StringRelatedField(many=True)
-    cleaning = serializers.StringRelatedField(many=True)
-    entertainment = serializers.StringRelatedField(many=True)
-    family = serializers.StringRelatedField(many=True)
-    facilities = serializers.StringRelatedField(many=True)
-    heating_and_cooling = serializers.StringRelatedField(many=True)
-    internet_and_office = serializers.StringRelatedField(many=True)
-    kitchen_and_dining = serializers.StringRelatedField(many=True)
-    outdoors = serializers.StringRelatedField(many=True)
-    parking = serializers.StringRelatedField(many=True)
-    safety = serializers.StringRelatedField(many=True)
-    services = serializers.StringRelatedField(many=True)
+    attractions = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Attractions.objects.all())
+    bathroom = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Bathroom.objects.all())
+    bedroom = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Bedroom.objects.all())
+    cleaning = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Cleaning.objects.all())
+    entertainment = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Entertainment.objects.all())
+    family = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Family.objects.all())
+    facilities = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Facilities.objects.all())
+    heating_and_cooling = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=HeatingAndCooling.objects.all())
+    internet_and_office = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=InternetAndOffice.objects.all())
+    kitchen_and_dining = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=KitchenAndDining.objects.all())
+    outdoors = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Outdoors.objects.all())
+    parking = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Parking.objects.all())
+    safety = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Safety.objects.all())
+    services = serializers.SlugRelatedField(many=True, slug_field='amenity', queryset=Services.objects.all())
+    # attractions = serializers.StringRelatedField(many=True)
+ 
 
+    property_images = serializers.SerializerMethodField()
 
     class Meta:
         model = Property
@@ -62,7 +68,20 @@ class PropertySerializer(serializers.ModelSerializer):
             'parking',
             'safety',
             'services',
+            'property_images'
         )
+    
+    def get_property_images(self, obj):
+        property_images_query = PropertyImages.objects.filter(property_id=obj.id)
+        serializer = PropertyImagesSerializer(property_images_query, many=True)
+        return serializer.data
+
+    def create(self, validated_data):
+        property_images = validated_data.pop('property_images')
+        property_instance = Property.objects.create(**validated_data)
+        for image in property_images:
+            PropertyImages.objects.create(property=property_instance,**image)
+        return property_instance
 
     # bathroom = serializers.SerializerMethodField(read_only=True)
 
@@ -70,15 +89,15 @@ class PropertySerializer(serializers.ModelSerializer):
     #     return [bathroom.__str__() for bathroom in model.bathroom.all().order_by('id')]
     
 
-    
-    
-
 class PropertyImagesSerializer(serializers.ModelSerializer):
-    property = serializers.StringRelatedField(many=False)
+    # property = serializers.StringRelatedField(many=False)
 
     class Meta:
         model = PropertyImages
-        fields =  '__all__'
+        fields =  '__all__'   
+    
+
+
 
 
 # class PropertySerializer(serializers.ModelSerializer):
