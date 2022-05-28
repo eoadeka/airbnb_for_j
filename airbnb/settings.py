@@ -50,12 +50,14 @@ INSTALLED_APPS = [
     'amenities.apps.AmenitiesConfig',
     'frontend.apps.FrontendConfig',
 
-    # corsheaders
-    'corsheaders',
-
     #django rest framework
     'rest_framework',
     'rest_framework.authtoken',
+    
+    # corsheaders
+    'corsheaders',
+
+   
     
     # social login
     'allauth',
@@ -73,6 +75,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,7 +83,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'django.contrib.staticfiles.finders.FileSystemFinder',
     # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'airbnb.urls'
@@ -104,16 +106,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'airbnb.wsgi.application'
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ),
-#     'DEFAULT_RENDERER_CLASSES': (
-#         'rest_framework.renderers.JSONRenderer',
-#     )
-# }
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -163,22 +155,52 @@ SITE_ID = 1
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'none' #email verification
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #email verification should be 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True #logs out user directly by GET request
 
-# REST_AUTH_SERIALIZERS = {
-#     'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
-#     'PASSWORD_RESET_SERIALIZER': 'accounts.serializers.CustomPasswordResetSerializer',
+# SIMPLE_JWT = {
+#     #  ....
+#     #  ...
+#      # Use JWT 
+#      'AUTH_HEADER_TYPES': ('JWT',),
+#      # 'AUTH_HEADER_TYPES': ('Bearer',),
+#     #  ....
+#     #  ...
 # }
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        # 'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    ),
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # )
+}
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'airbnb-app-auth'
 
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.UserRegisterSerializer',
 }
 
-ACCOUNT_FORMS = {'signup': 'accounts.forms.UserCreationForm'}
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
+    # 'PASSWORD_RESET_SERIALIZER': 'accounts.serializers.CustomPasswordResetSerializer',
+}
+
+
+ACCOUNT_FORMS = {'signup': 'accounts.forms.UserRegisterForm'}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -213,6 +235,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/static/')
 LOGIN_URL='http://127.0.0.1:8000/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
 # FRONTEND_PATH = os.path.dir
 

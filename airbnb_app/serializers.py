@@ -38,7 +38,7 @@ class PropertySerializer(serializers.ModelSerializer):
     # attractions = serializers.StringRelatedField(many=True)
  
 
-    property_images = serializers.SerializerMethodField()
+    property_images = serializers.SerializerMethodField(allow_null=True)
 
     class Meta:
         model = Property
@@ -76,12 +76,12 @@ class PropertySerializer(serializers.ModelSerializer):
         serializer = PropertyImagesSerializer(property_images_query, many=True)
         return serializer.data
 
-    def create(self, validated_data):
-        property_images = validated_data.pop('property_images')
-        property_instance = Property.objects.create(**validated_data)
-        for image in property_images:
-            PropertyImages.objects.create(property=property_instance,**image)
-        return property_instance
+    # def create(self, validated_data):
+    #     property_images = validated_data.pop('property_images')
+    #     property_instance = Property.objects.create(**validated_data)
+    #     for image in property_images:
+    #         PropertyImages.objects.create(property=property_instance,**image)
+    #     return property_instance
 
     # bathroom = serializers.SerializerMethodField(read_only=True)
 

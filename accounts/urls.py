@@ -18,7 +18,6 @@ from django.urls import path, re_path
 from .views import main
 from dj_rest_auth.registration.views import RegisterView
 from dj_rest_auth.views import LoginView, LogoutView
-# from rest_framework_simplejwt.views import obtain_jwt_token
 
 
 urlpatterns = [

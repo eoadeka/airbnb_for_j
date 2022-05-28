@@ -29,6 +29,9 @@ export default class MainNavigation extends Component{
                                 <Link to="/login">Login</Link>
                             </li>
                             <li>
+                                <Link to="/logout">Logout</Link>
+                            </li>
+                            <li>
                                 <Link to="/register">Register</Link>
                             </li>
                             <li>
@@ -53,6 +56,7 @@ export default class MainNavigation extends Component{
 
                 {/* Route will look though its children <Routes> and render th first on that matches the current URL */}
                 <Routes>
+                    <Route exact path="/logout"></Route>
                     <Route exact path="/login" element={<Login />}></Route>
                     <Route exact path="/register" element={<Register />}></Route>
                     <Route exact path="/profile" element={<UserProfile />}></Route>
