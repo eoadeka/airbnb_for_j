@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .serializers import *
 from .models import User
-# from .forms import *
+from .forms import *
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
@@ -70,4 +70,4 @@ class GoogleLogin(SocialLoginView): # if you want to use Implicit Grant, use thi
 
 class RegisterView(RegisterView):
     serializer_class = UserRegisterSerializer
-    # form = UserRegisterForm
+    form = UserRegisterForm
