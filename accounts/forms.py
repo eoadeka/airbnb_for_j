@@ -5,6 +5,7 @@ from .models import *
 class UserRegisterForm(UserCreationForm):
     firstname = forms.CharField(max_length=32, help_text='First Name')
     lastname = forms.CharField(max_length=32, help_text='Last Name')
+    # avatar = forms.FileField(required=False)
     username = None
     email = forms.EmailField(required=True, max_length=64, help_text='Enter a valid email address')
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -29,6 +30,7 @@ class UserRegisterForm(UserCreationForm):
     def save(self, commit=True):
         user = super(UserRegisterForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
+        user.avatar = self.cleaned_data.get('avatar')
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
