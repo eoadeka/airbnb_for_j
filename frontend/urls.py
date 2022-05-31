@@ -15,6 +15,7 @@ urlpatterns = [
     path('properties/<str:id>/<slug:slug>', index),
 
     path('login', index),
-    path('register', index),
+    path('logout', index),
+    path('signup', index),
     path('profile', index)
 ]

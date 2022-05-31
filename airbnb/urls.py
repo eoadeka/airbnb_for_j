@@ -34,17 +34,16 @@ urlpatterns = [
     path('api/', include(('airbnb.routers', 'airbnb'), namespace='airbnb_api')),
     path('', include('frontend.urls')),
 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # path('accounts/', include('accounts.urls')),
+    path('api/v1/users/', include('accounts.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('allauth.urls')),
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    
     path('dj-rest-auth/registration/account-confirm-email/<str:key>/',ConfirmEmailView.as_view(),), # Needs to be defined before the registration path
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
-        path('verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
+    path('verify-email/', VerifyEmailView.as_view(), name='rest_verify_email'),
     path('account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(), name='account_confirm_email'),
 
