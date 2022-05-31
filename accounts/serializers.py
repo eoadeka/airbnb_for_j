@@ -1,5 +1,7 @@
-from .models import User
+from requests import request
+from accounts.models import User
 from django.db import transaction
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 from dj_rest_auth.serializers import UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
@@ -15,8 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'email',
-            'firstname',
-            'lastname',
+            'first_name',
+            'last_name',
             'avatar',
             'is_active',
             'is_staff',
@@ -28,23 +30,35 @@ class UserSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         ]
-    
 
 class UserRegisterSerializer(RegisterSerializer):
     username = None
-    firstname = serializers.CharField(required=True)
-    lastname = serializers.CharField(required=True)
-    avatar = serializers.ImageField(max_length=None, use_url=True)
+    email = serializers.EmailField(required=True, write_only=True, max_length=128)
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
+    avatar = serializers.FileField(max_length=None, use_url=True, allow_empty_file=True)
 
     class Meta:
         model = User
+        # fields = ['id', 'email','first_name', 'last_name', 'password','avatar', 'is_active', 'created_at', 'updated_at']
+
+    # def create(self, validated_data):
+    #     try:
+    #         user = User.objects.get(email=validated_data['email'])
+    #     except ObjectDoesNotExist:
+    #         user = User.objects.create_user(**validated_data)
+    #     return user
 
     @transaction.atomic
     def save(self, request):
         user = super().save(request)
-        user.firstname = self.data.get('firstname')
-        user.lastname = self.data.get('lastname')
-        user.avatar = request.FILES.get('avatar')
+        user.first_name = self.data.get('first_name')
+        user.last_name = self.data.get('last_name')
+        # user.avatar = request.FILES.get('avatar')
+        if 'avatar' in request.FILES:
+            user.avatar = request.FILES['avatar']
+        else:
+            user.avatar = ['']
         user.save()
         return user
 
@@ -54,7 +68,7 @@ class UserDetailsSerializer(UserDetailsSerializer):
     class Meta:
         model = User
         fields = '__all__'
-        # read_only_fields = ('id', 'email', 'firstname', 'lastname', 'avatar')
+        read_only_fields = ('id', 'email', 'first_name', 'last_name', 'avatar')
         # permission_classes = (IsAuthenticated,)
 
 

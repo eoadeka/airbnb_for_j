@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,26 +30,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # existing backend
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-
 INSTALLED_APPS = [
-    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # apps
-    'airbnb_app.apps.AirbnbAppConfig',
-    'amenities.apps.AmenitiesConfig',
-    'frontend.apps.FrontendConfig',
 
     #django rest framework
     'rest_framework',
@@ -65,17 +53,25 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth',
     'dj_rest_auth.registration',
+    'django.contrib.sites',
     
     # the social providers
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',
+
+    # apps
+    'accounts.apps.AccountsConfig',
+    'core.apps.CoreConfig',
+    'airbnb_app.apps.AirbnbAppConfig',
+    'amenities.apps.AmenitiesConfig',
+    'frontend.apps.FrontendConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,15 +147,24 @@ USE_I18N = True
 
 USE_TZ = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Application definition
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # existing backend
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 SITE_ID = 1
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' #email verification should be 'mandatory'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'none' #email verification should be 'mandatory'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True #logs out user directly by GET request
 
 # SIMPLE_JWT = {
@@ -173,13 +178,17 @@ ACCOUNT_LOGOUT_ON_GET = True #logs out user directly by GET request
 # }
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.AllowAny'
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication', 
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
         # 'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
     # 'DEFAULT_RENDERER_CLASSES': (
@@ -187,8 +196,44 @@ REST_FRAMEWORK = {
     # )
 }
 
-REST_USE_JWT = True
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=50),
+#     'ROTATE_REFRESH_TOKENS': True,
+#     'BLACKLIST_AFTER_ROTATION': True,
+#     'UPDATE_LAST_LOGIN': False,
+
+#     'ALGORITHM': 'HS256',
+
+#     'VERIFYING_KEY': None,
+#     'AUDIENCE': None,
+#     'ISSUER': None,
+#     'JWK_URL': None,
+#     'LEEWAY': 0,
+
+#     'AUTH_HEADER_TYPES': ('Bearer',),
+#     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+#     'USER_ID_FIELD': 'id',
+#     'USER_ID_CLAIM': 'user_id',
+#     'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+
+#     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+#     'TOKEN_TYPE_CLAIM': 'token_type',
+#     'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+
+#     'JTI_CLAIM': 'jti',
+
+#     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+#     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+#     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+# }
+
+# REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'airbnb-app-auth'
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'airbnb.utils.my_jwt_response_handler'
+}
 
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.UserRegisterSerializer',
@@ -196,6 +241,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
+    # 'TOKEN_SERIALIZER': 'Project.path.to.TokenSerializer',
     # 'PASSWORD_RESET_SERIALIZER': 'accounts.serializers.CustomPasswordResetSerializer',
 }
 
@@ -224,6 +270,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     "http://127.0.0.1:3000"
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
