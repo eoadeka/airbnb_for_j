@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {  BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -10,33 +10,73 @@ import Property from "../pages/properties/Property";
 import Properties from "../pages/properties/Properties";
 // Registration
 import Login from "../pages/Registration/Login";
-import Register from "../pages/Registration/Register";
+import Signup from "../pages/Registration/Signup";
 // Profile
 import UserProfile from "../pages/Users/UserProfile";
+// import Logout from "../pages/Registration/Logout";
 
 export default class MainNavigation extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            isAuth: false
+        }
+    }
+
+    componentDidMount(){
+        if (localStorage.getItem('token') !== null) {
+            this.setState({
+                isAuth: true
+            })
+        }
+    }
+
+    handleLogout = (event) => {
+        event.preventDefault();
+        fetch('http://127.0.0.1:8000/api/v1/users/dj-rest-auth/logout/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Token ${localStorage.getItem('token')}`
+            }
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                localStorage.clear();
+                window.location.replace('http://127.0.0.1:8000/login');
+            });
     }
 
     render(){
+        const { isAuth } = this.state;
+
         return(
             <Router>
                 <header>
                     <nav>
                         <ul>
-                            <li>
-                                <Link to="/login">Login</Link>
-                            </li>
-                            <li>
-                                <Link to="/logout">Logout</Link>
-                            </li>
-                            <li>
-                                <Link to="/register">Register</Link>
-                            </li>
-                            <li>
-                                <Link to="/profile">Profile</Link>
-                            </li>
+                            {isAuth === true ? (
+                                <Fragment>
+                                    {' '}
+                                    <li>
+                                        <Link to="/profile">Profile</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/logout" onClick={this.handleLogout}>Logout</Link>
+                                    </li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    {' '}
+                                    <li>
+                                        <Link to="/login">Login</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/signup">Signup</Link>
+                                    </li>
+                                </Fragment>
+                            )}
                             <br></br>
                             <li>
                                 <Link to="/">Home</Link>
@@ -54,11 +94,10 @@ export default class MainNavigation extends Component{
                     </nav>
                 </header>
 
-                {/* Route will look though its children <Routes> and render th first on that matches the current URL */}
                 <Routes>
-                    <Route exact path="/logout"></Route>
+                    {/* <Route exact path="/logout" element={<Logout/>}></Route> */}
                     <Route exact path="/login" element={<Login />}></Route>
-                    <Route exact path="/register" element={<Register />}></Route>
+                    <Route exact path="/signup" element={<Signup />}></Route>
                     <Route exact path="/profile" element={<UserProfile />}></Route>
                     <Route exact path="/cities" element={<Cities />}></Route>
                     <Route exact path="/cities/:slug" element={<City />}></Route>

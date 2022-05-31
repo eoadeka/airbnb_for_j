@@ -1,6 +1,8 @@
-import React, { Component } from "react";
-import { withUrlParams } from "../../../utils/urlParams";
+import React, { Component, Fragment } from "react";
+import {  Link } from "react-router-dom";
 import axios from "axios";
+import { withUrlParams } from "../../../utils/urlParams";
+
 // import { useParams } from "react-router-dom";
 // import propertiesList from "./Properties";
 
@@ -9,12 +11,18 @@ import axios from "axios";
         super(props);
         this.state = {
             propertyItem: [],
-            propertyImagesList: []
+            propertyImagesList: [],
+            isAuth: false,
         }
     }
 
     componentDidMount(){
         this.showPropertyItem();
+        if (localStorage.getItem('token') !== null) {
+            this.setState({
+                isAuth: true
+            })
+        }
     }
 
     async showPropertyItem(){
@@ -37,7 +45,7 @@ import axios from "axios";
         {/* USE SPREAD OPERATOR TO FILTER BY AMENITIES AVAILABLE */}
 
         const   {id}  = this.props.params;
-        const {propertyItem, propertyImagesList } = this.state;
+        const {propertyItem, propertyImagesList, isAuth } = this.state;
         
         return(
             <div className="property_body">
@@ -60,6 +68,20 @@ import axios from "axios";
                         <p>Bedroom: {property.bedroom.length == 0 ?  'Sorry, no amenities available' : property.bedroom}</p>
                         <p>Available: {property.is_available.toString()}</p>
                         <br></br>
+                        <br></br>
+                        {
+                            isAuth ?  (
+                                <Fragment>
+                                    <input type="button" value="Book Now"  ></input>
+                                    <input type="button" value="Add to wishlist"  style={{marginBottom: "2em" }}></input>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <Link to={{ pathname: `/login` }}><button style={{marginBottom: "2em", color: "pink", background: "black"}}>Book Now</button></Link>
+                                    {/* <br></br> */}
+                                </Fragment>
+                            )
+                        }
                         <hr></hr>
                         <br></br>
                         <h1>Property Images</h1>
@@ -68,6 +90,7 @@ import axios from "axios";
                                 <img src={property_image.images} alt={property.title} width="200" />
                             </div>
                         ))}</div>
+
                         
                         {propertyImagesList.filter((propertyImage) => propertyImage.property === property.title).map((image) => (
                             <div key={image.id}>
@@ -78,6 +101,7 @@ import axios from "axios";
                                 ))}; */}
                             </div>
                         ))}
+                        
                     </div>
                     
                 ))}
