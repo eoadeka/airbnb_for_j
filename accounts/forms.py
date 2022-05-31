@@ -2,9 +2,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
+
+
 class UserRegisterForm(UserCreationForm):
-    firstname = forms.CharField(max_length=32, help_text='First Name')
-    lastname = forms.CharField(max_length=32, help_text='Last Name')
+    first_name = forms.CharField(max_length=32, help_text='First Name')
+    last_name = forms.CharField(max_length=32, help_text='Last Name')
     # avatar = forms.FileField(required=False)
     username = None
     email = forms.EmailField(required=True, max_length=64, help_text='Enter a valid email address')
@@ -13,7 +15,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email','firstname','lastname','password1', 'password2', 'avatar')
+        fields = ('email','first_name','last_name','password1', 'password2', 'avatar')
         help_texts = {
             'username': None,
             'email': None,            
