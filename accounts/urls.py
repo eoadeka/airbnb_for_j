@@ -14,19 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path, re_path
-from .views import main
-from dj_rest_auth.registration.views import RegisterView
-from dj_rest_auth.views import LoginView, LogoutView
+from django.urls import path, include, re_path
+from accounts.views import main, current_user, UserList
+# from dj_rest_auth.registration.views import RegisterView
+# from dj_rest_auth.views import LoginView, LogoutView
 
 
 urlpatterns = [
     path('', main),
     # path('account-confirm-email/<str:key>/', ConfirmEmailView.as_view()),
-    path('signup/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view()),
-    path('logout/', LogoutView.as_view()),
+    # path('signup/', RegisterView.as_view(), name='register'),
+    # path('login/', LoginView.as_view()),
+    # path('logout/', LogoutView.as_view()),
 
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+
+    path('current_user/', current_user),
+    path('users/', UserList.as_view()),
 
     path('accounts', main),
 ]
