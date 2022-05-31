@@ -1,11 +1,25 @@
 from rest_framework import routers
-from accounts import views as accounts
+from accounts.views import UserViewSet
 from airbnb_app import views as airbnb_app
+# from accounts.views import UserViewSet
+from core.views import LoginViewSet, RegistrationViewSet, RefreshViewSet
+
 
 router = routers.DefaultRouter()
 
+# USER
+# router.register(r'user', UserViewSet, basename='user')
+
+
 # accounts
-router.register(r'accounts', accounts.UserViewSet, 'account')
+router.register(r'accounts', UserViewSet, 'accounts')
+
+# AUTHENTICATION
+router.register(r'auth/login', LoginViewSet, basename='auth-login')
+router.register(r'auth/register', RegistrationViewSet, basename='auth-register')
+router.register(r'auth/refresh', RefreshViewSet, basename='auth-refresh')
+
+
 # cities
 router.register(r'cities', airbnb_app.CitiesView, 'city')
 
