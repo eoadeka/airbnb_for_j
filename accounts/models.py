@@ -1,7 +1,10 @@
+from pickle import NONE
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 # from PIL import Image
+# from django.contrib.auth import get_user_model
+# User = get_user_model()
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -32,9 +35,10 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+    username = None
     email = models.EmailField(db_index=True, unique=True, null=True, blank=True)
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     avatar = models.ImageField(default="default.png", upload_to="images/profile_pics")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -50,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def get_full_name(self):
-        return "{} {}".format(self.firstname, self.lastname)
+        return "{} {}".format(self.first_name, self.last_name)
 
     # @property
     # def is_active(self):
