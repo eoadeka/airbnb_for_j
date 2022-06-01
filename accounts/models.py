@@ -35,6 +35,7 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+    # add phone number
     username = None
     email = models.EmailField(db_index=True, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=255)
