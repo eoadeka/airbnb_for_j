@@ -34,12 +34,12 @@ urlpatterns = [
     path('api/', include(('airbnb.routers', 'airbnb'), namespace='airbnb_api')),
     path('', include('frontend.urls')),
 
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/users/', include('accounts.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/', include('allauth.urls')),
+    path('tight/', include('allauth.urls')),
     
     path('dj-rest-auth/registration/account-confirm-email/<str:key>/',ConfirmEmailView.as_view(),), # Needs to be defined before the registration path
 
