@@ -36,7 +36,7 @@ class UserRegisterSerializer(RegisterSerializer):
     email = serializers.EmailField(required=True, write_only=True, max_length=128)
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
-    avatar = serializers.FileField(max_length=None, use_url=True, allow_empty_file=True)
+    avatar = serializers.ImageField(max_length=None)
 
     class Meta:
         model = User
@@ -54,11 +54,11 @@ class UserRegisterSerializer(RegisterSerializer):
         user = super().save(request)
         user.first_name = self.data.get('first_name')
         user.last_name = self.data.get('last_name')
-        # user.avatar = request.FILES.get('avatar')
-        if 'avatar' in request.FILES:
-            user.avatar = request.FILES['avatar']
-        else:
-            user.avatar = ['']
+        user.avatar = request.FILES.get('avatar')
+        # if 'avatar' in request.FILES:
+        #     user.avatar = request.FILES['avatar']
+        # else:
+        #     user.avatar = ['']
         user.save()
         return user
 
