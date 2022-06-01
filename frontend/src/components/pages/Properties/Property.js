@@ -60,6 +60,7 @@ import { withUrlParams } from "../../../utils/urlParams";
                         <img src={property.image} alt={property.title} width="100%" height="500px"></img>
                         <p>Type : {property.type}</p>
                         <p>City : {property.city}</p>
+                        <p><strong> £{property.price}</strong></p>
                         <p>Highlights : {property.highlights}</p>
                         <p>Description: {property.description}</p>
                         <p>Bathroom: {property.bathroom.map((bathroom, index) => (
@@ -73,7 +74,7 @@ import { withUrlParams } from "../../../utils/urlParams";
                             isAuth ?  (
                                 <Fragment>
                                     <input type="button" value="Book Now"  ></input>
-                                    <input type="button" value="Add to wishlist"  style={{marginBottom: "2em" }}></input>
+                                    <input type="button" value="Add to wishlist"  style={{marginBottom: "2em", marginLeft: "2em" }}></input>
                                 </Fragment>
                             ) : (
                                 <Fragment>
