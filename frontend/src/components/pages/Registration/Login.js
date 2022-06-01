@@ -38,8 +38,9 @@ export default class Login extends Component{
             password: this.state.password
         };
 
+        // fetch('http://127.0.0.1:8000/tight/login/', {
         fetch('http://127.0.0.1:8000/api/v1/users/dj-rest-auth/login/', {
-        // fetch('http://127.0.0.1:8000/api/auth/login/', {
+        // fetch('http://127.0.0.1:8000/api/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +71,7 @@ export default class Login extends Component{
         return(
             <div>
                 { loading === false && <h1>Login</h1> }
-                { errors === true && <h2>Cannot login with provided credentials</h2> }
+                { errors === true && <h2>Invalid email or password</h2> }
 
                 {/* <h1>Login</h1>  */}
                 { loading === false && (
