@@ -12,7 +12,7 @@ router = routers.DefaultRouter()
 
 
 # accounts
-router.register(r'accounts', UserViewSet, 'accounts')
+router.register(r'users', UserViewSet, 'users')
 
 # AUTHENTICATION
 router.register(r'auth/login', LoginViewSet, basename='auth-login')
