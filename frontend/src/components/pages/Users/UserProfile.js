@@ -18,6 +18,7 @@ export default class UserProfile extends Component{
             window.location.replace('http://127.0.0.1:8000/login');
         } else {
             fetch('http://127.0.0.1:8000/api/v1/users/dj-rest-auth/user/', {
+            // fetch('http://127.0.0.1:8000/api/users/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
