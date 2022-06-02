@@ -13,6 +13,7 @@ import { withUrlParams } from "../../../utils/urlParams";
             propertyItem: [],
             propertyImagesList: [],
             isAuth: false,
+            formShowing: true,
         }
     }
 
@@ -58,9 +59,10 @@ import { withUrlParams } from "../../../utils/urlParams";
                     <div key={property.id}>
                         <h1>{property.title}</h1>
                         <img src={property.image} alt={property.title} width="100%" height="500px"></img>
+                        <Link to={{ pathname: '/contact'}}><button type="button" style={{ position: "absolute", zIndex: "-1", top: "-0.5em", right: "0"}}>Enquire Now</button></Link>
                         <p>Type : {property.type}</p>
                         <p>City : {property.city}</p>
-                        <p><strong> £{property.price}</strong></p>
+                        <p>Price: <strong> £{property.price}</strong> per night</p>
                         <p>Highlights : {property.highlights}</p>
                         <p>Description: {property.description}</p>
                         <p>Bathroom: {property.bathroom.map((bathroom, index) => (
@@ -73,12 +75,14 @@ import { withUrlParams } from "../../../utils/urlParams";
                         {
                             isAuth ?  (
                                 <Fragment>
-                                    <input type="button" value="Book Now"  ></input>
-                                    <input type="button" value="Add to wishlist"  style={{marginBottom: "2em", marginLeft: "2em" }}></input>
+                                    <button type="button">Check Availability</button>
+                                    <br></br>
+                                    <br></br>
+                                    <button type="button" >Add to wishlist</button>
                                 </Fragment>
                             ) : (
                                 <Fragment>
-                                    <Link to={{ pathname: `/login` }}><button style={{marginBottom: "2em", color: "pink", background: "black"}}>Book Now</button></Link>
+                                    <Link to={{ pathname: `/login` }}><button style={{marginBottom: "2em"}}>Book Now</button></Link>
                                     {/* <br></br> */}
                                 </Fragment>
                             )
@@ -122,3 +126,21 @@ import { withUrlParams } from "../../../utils/urlParams";
 }
 
 export default withUrlParams(Property)
+
+// Property Form
+// Check-in Date
+// Check-out Date
+// apt type: 1Bed, 1 Bedroom, 2bed
+// No of guests (add maximum)
+
+// details
+// Purpose of travel:leisure, business
+// first name
+// last name
+// Country code
+// Phone number
+// email
+
+// Please tick this box to confirm that you've read our Privacy Policy and Client Terms & Conditions
+// Please tick this box if you'd like to receive updates from us. Don't worry it's not often
+

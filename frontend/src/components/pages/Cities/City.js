@@ -44,6 +44,7 @@ class City extends Component{
                                     <h2>{property.title}</h2>
                                     <img src={property.image} alt={property.title} width="200"></img>
                                     <p>{property.description}</p>
+                                    <p><strong> £{property.price}</strong></p>
                                     <br></br>
                                 </Link>
                                 <hr></hr>
