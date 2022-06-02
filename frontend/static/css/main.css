@@ -94,4 +94,44 @@ img {
   -o-object-position: top;
      object-position: top;
 }
+
+.profile_pic {
+  width: 100px;
+  height: 100px;
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+input, button {
+  border: 1px solid pink;
+  padding: 1.5em;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+input:hover, button:hover {
+  font-size: 0.9em;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+::-webkit-file-upload-button {
+  border: 1px solid pink;
+  background: pink;
+  padding: 1em;
+  font-family: 'Fahkwang', sans-serif;
+}
+
+input[type="file"] {
+  border: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: pink;
+  width: 150px;
+  height: 90px;
+}
 /*# sourceMappingURL=main.css.map */

@@ -41,3 +41,44 @@ img{
     object-fit: cover;
     object-position: top;
 }
+
+.profile_pic{
+    width: 100px;
+    height: 100px;
+    clip-path: circle(50%);
+    object-fit: cover;
+}
+
+
+input, button{
+    border: 1px solid pink;
+    padding: 1.5em;
+  
+    transition: all .2s ease-in-out;
+
+    &:hover{
+        font-size: 0.9em;
+        transition: all .2s ease-in-out;
+        // color:white;
+    }
+}
+
+::-webkit-file-upload-button {
+    border: 1px solid pink;
+    background: pink;
+    padding: 1em;
+    font-family: 'Fahkwang', sans-serif;
+  }
+
+input[type="file"]{
+    border: none;
+}
+
+button{
+    cursor: pointer;
+    background-color: pink;
+    width: 150px;
+    height: 90px;
+    // position: absolute;
+    // right: 0;
+}
