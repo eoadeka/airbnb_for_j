@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import {  BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
+import Contact from "../pages/Contact";
 // City-related
 import City from "../pages/Cities/City";
 import Cities from "../pages/Cities/Cities";
@@ -85,6 +86,9 @@ export default class MainNavigation extends Component{
                                 <Link to="/about">About</Link>
                             </li>
                             <li>
+                                <Link to="/contact">Contact</Link>
+                            </li>
+                            <li>
                                 <Link to="/cities">Cities</Link>
                             </li>
                             <li>
@@ -103,6 +107,7 @@ export default class MainNavigation extends Component{
                     <Route exact path="/cities/:slug" element={<City />}></Route>
                     <Route exact path="/properties" element={<Properties />}></Route>
                     <Route exact path="/properties/:id/:slug" element={<Property />}></Route>
+                    <Route exact path="/contact" element={<Contact />}></Route>
                     <Route exact path="/about" element={<About />}></Route>
                     <Route exact path="/" element={<Home />}></Route>
                 </Routes>
