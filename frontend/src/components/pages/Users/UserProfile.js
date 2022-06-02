@@ -9,8 +9,15 @@ export default class UserProfile extends Component{
             first_name: '',
             last_name: '',
             avatar: '',
-            loading: true
+            loading: true,
+            formShowing: true,
+
+            newFirstName : '',
+            newLastName : '',
         }
+        // console.log(this.state.formShowing)
+
+        this.showUpdateForm = this.showUpdateForm.bind(this);
     }
 
     componentDidMount(){
@@ -36,25 +43,58 @@ export default class UserProfile extends Component{
                 })
             });
         }
+
+        // window.sessionStorage.setItem("formShowing", this.state.formShowing);
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name] : event.target.value
+        })
     }
 
     formatUser(user){
         return user.first_name + ' ' + user.last_name;
     }
 
+    showUpdateForm = () => {
+        this.setState(prevState => ({
+            formShowing: !prevState.formShowing
+        }));
+    }
+
     
     render(){
-        const { avatar, email, first_name, loading } = this.state;
+        const { avatar, email, first_name, loading, formShowing } = this.state;
+        const { newFirstName, newLastName } = this.state;
         
         return(
             <div>
                 { loading === false && (
                     <Fragment>
-                        <h1>User Profile</h1>
-                        <h6>Hello, {first_name}</h6>
-                        <p>Fullname: {this.formatUser(this.state)}</p>
-                        <p>Email: {email}</p>
-                        <img src={avatar} alt={first_name} width="200"></img>
+                        <main>
+                            <h1>User Profile</h1>
+                            <h6>Hello, {first_name}</h6>
+                            <button type="button" onClick={this.showUpdateForm} style={{ position: 'absolute', right: "0"}}>{ formShowing ? 'Update' : 'Close'}</button>
+                            <p>Fullname: {this.formatUser(this.state)}</p>
+                            <p>Email: {email}</p>
+                            <img src={avatar} alt={first_name} className="profile_pic"></img>
+                        </main>   
+
+                        <section style={{ position: 'absolute', right: "0", textAlign: "right"}}>
+                            { formShowing ? (
+                                ''
+                            ) : (
+                                <form>
+                                    <h4 style={{fontFamily: "'Syne', sans-serif", fontSize: "2em"}}>Update  Form</h4>
+                                    <input type="text"  value={newFirstName} name="newFirstName" onChange={this.handleChange} placeholder="First Name" style={{backgroundColor: "white"}} />
+                                    <br></br>
+                                    <input type="text"  value={newLastName} name="newLastName" onChange={this.handleChange} placeholder="Last Name" style={{backgroundColor: "white"}} />
+                                    <br></br>
+                                    <input type="submit" value="Update"></input>
+                                </form> 
+                            )}
+                        </section>
                     </Fragment>
                 )}
             </div>
