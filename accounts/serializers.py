@@ -36,7 +36,7 @@ class UserRegisterSerializer(RegisterSerializer):
     email = serializers.EmailField(required=True, write_only=True, max_length=128)
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
-    avatar = serializers.ImageField(max_length=None)
+    avatar = serializers.ImageField(required=False, max_length=None,  allow_empty_file=True, use_url=True)
 
     class Meta:
         model = User
