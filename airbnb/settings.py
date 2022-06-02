@@ -280,7 +280,8 @@ MEDIA_URL = "/images/" #edited
 MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/static/')
 
 
-LOGIN_URL='http://127.0.0.1:8000/login'
+# LOGIN_URL='http://127.0.0.1:8000/login'
+LOGIN_URL='http://127.0.0.1:8000/api/v1/users/dj-rest-auth/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
