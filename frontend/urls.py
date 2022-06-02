@@ -9,6 +9,7 @@ urlpatterns = [
     # re_path(r".*", index),
     path('', index, name='home'),
     path('about', index),
+    path('contact', index),
     path('cities', index),
     path('cities/<slug:slug>', index),
     path('properties', index),
