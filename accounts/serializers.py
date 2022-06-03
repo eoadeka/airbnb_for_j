@@ -40,7 +40,7 @@ class UserRegisterSerializer(RegisterSerializer):
 
     class Meta:
         model = User
-        # fields = ['id', 'email','first_name', 'last_name', 'password','avatar', 'is_active', 'created_at', 'updated_at']
+        fields = ['id', 'email','first_name', 'last_name', 'password','avatar', 'is_active', 'created_at', 'updated_at']
 
     # def create(self, validated_data):
     #     try:
@@ -52,13 +52,14 @@ class UserRegisterSerializer(RegisterSerializer):
     @transaction.atomic
     def save(self, request):
         user = super().save(request)
+        
         user.first_name = self.data.get('first_name')
         user.last_name = self.data.get('last_name')
-        user.avatar = request.FILES.get('avatar')
-        # if 'avatar' in request.FILES:
-        #     user.avatar = request.FILES['avatar']
-        # else:
-        #     user.avatar = ['']
+        # user.avatar = request.FILES.get('avatar')
+        if 'avatar' in request.FILES:
+            user.avatar = request.FILES['avatar']
+        else:
+            user.avatar = ['']
         user.save()
         return user
 
