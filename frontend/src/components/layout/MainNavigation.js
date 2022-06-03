@@ -15,21 +15,27 @@ import Signup from "../pages/Registration/Signup";
 // Profile
 import UserProfile from "../pages/Users/UserProfile";
 // import Logout from "../pages/Registration/Logout";
+// Admin
+import Admin from "../pages/Admin/Admin";
+import DeactivateUserAccount from "../pages/Users/DeactivateUserAccount";
+import PasswordReset from "../pages/Registration/PasswordReset";
 
 export default class MainNavigation extends Component{
     constructor(props){
         super(props);
         this.state = {
-            isAuth: false
+            isAuth: false,
+            first_name: '',
+            last_name: ''
         }
     }
 
     componentDidMount(){
         if (localStorage.getItem('token') !== null) {
             this.setState({
-                isAuth: true
-            })
-        }
+                isAuth: true,
+            });
+        } 
     }
 
     handleLogout = (event) => {
@@ -61,7 +67,7 @@ export default class MainNavigation extends Component{
                                 <Fragment>
                                     {' '}
                                     <li>
-                                        <Link to="/profile">Profile</Link>
+                                        <Link to="/user/profile">Profile</Link>
                                     </li>
                                     <li>
                                         <Link to="/logout" onClick={this.handleLogout}>Logout</Link>
@@ -80,13 +86,18 @@ export default class MainNavigation extends Component{
                             )}
                             <br></br>
                             <li>
+                                <Link to="/loose/admin">Admin</Link>
+                            </li>
+
+                            <br></br>
+                            <li>
                                 <Link to="/">Home</Link>
                             </li>
                             <li>
-                                <Link to="/about">About</Link>
+                                <Link to="/about-us">About Us</Link>
                             </li>
                             <li>
-                                <Link to="/contact">Contact</Link>
+                                <Link to="/contact-us">Contact</Link>
                             </li>
                             <li>
                                 <Link to="/cities">Cities</Link>
@@ -99,16 +110,22 @@ export default class MainNavigation extends Component{
                 </header>
 
                 <Routes>
+                    <Route exact path="/loose/admin" element={<Admin />}></Route>
+
                     {/* <Route exact path="/logout" element={<Logout/>}></Route> */}
                     <Route exact path="/login" element={<Login />}></Route>
                     <Route exact path="/signup" element={<Signup />}></Route>
-                    <Route exact path="/profile" element={<UserProfile />}></Route>
+                    <Route exact path="/password-reset" element={<PasswordReset />}></Route>
+
+                    <Route exact path="/user/profile" element={<UserProfile />}></Route>
+                    <Route exact path="/user/deactivate" element={<DeactivateUserAccount />}></Route>
+
                     <Route exact path="/cities" element={<Cities />}></Route>
                     <Route exact path="/cities/:slug" element={<City />}></Route>
                     <Route exact path="/properties" element={<Properties />}></Route>
                     <Route exact path="/properties/:id/:slug" element={<Property />}></Route>
-                    <Route exact path="/contact" element={<Contact />}></Route>
-                    <Route exact path="/about" element={<About />}></Route>
+                    <Route exact path="/contact-us" element={<Contact />}></Route>
+                    <Route exact path="/about-us" element={<About />}></Route>
                     <Route exact path="/" element={<Home />}></Route>
                 </Routes>
             </Router>
