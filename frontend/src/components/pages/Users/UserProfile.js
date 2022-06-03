@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 
 export default class UserProfile extends Component{
     constructor(props){
@@ -65,7 +66,7 @@ export default class UserProfile extends Component{
 
     
     render(){
-        const { avatar, email, first_name, loading, formShowing } = this.state;
+        const { avatar, email, first_name, last_name, loading, formShowing } = this.state;
         const { newFirstName, newLastName } = this.state;
         
         return(
@@ -73,9 +74,10 @@ export default class UserProfile extends Component{
                 { loading === false && (
                     <Fragment>
                         <main>
-                            <h1>User Profile</h1>
-                            <h6>Hello, {first_name}</h6>
-                            <button type="button" onClick={this.showUpdateForm} style={{ position: 'absolute', right: "0"}}>{ formShowing ? 'Update' : 'Close'}</button>
+                            <Link to={{ pathname: `/user/deactivate` }} style={{ position: "absolute", top: "1em", right: "1em"}}>Deactivate</Link>
+                            {/* <h1>User Profile</h1> */}
+                            <h1>Hello, {first_name}</h1>
+                            <button type="button" onClick={this.showUpdateForm} style={{ position: 'absolute', right: "0"}}>{ formShowing ? 'Edit' : 'Close'}</button>
                             <p>Fullname: {this.formatUser(this.state)}</p>
                             <p>Email: {email}</p>
                             <img src={avatar} alt={first_name} className="profile_pic"></img>
