@@ -7,16 +7,29 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # re_path(r".*", index),
+
+    # Admin
+    path('loose/admin', index),
+    
+    # Authentication
+    path('login', index),
+    path('logout', index),
+    path('signup', index),
+    path('password-reset', index),
+
+    # User
+    path('user/deactivate', index),
+    path('user/profile', index),
+
+    # Pages
     path('', index, name='home'),
-    path('about', index),
-    path('contact', index),
+    path('about-us', index),
+    path('contact-us', index),
     path('cities', index),
     path('cities/<slug:slug>', index),
     path('properties', index),
     path('properties/<str:id>/<slug:slug>', index),
 
-    path('login', index),
-    path('logout', index),
-    path('signup', index),
-    path('profile', index)
+
+   
 ]
