@@ -30,6 +30,11 @@ h2, h6{
     overflow-wrap: break-word;
 }
 
+h3, h4{
+    font-family: 'Syne', sans-serif;
+
+}
+
 p, li, input, label, button{
     // font-family: 'Cormorant Garamond', serif;
     font-family: 'Fahkwang', sans-serif;
@@ -42,9 +47,13 @@ img{
     object-position: top;
 }
 
+.property_images{
+    display: inline;
+}
+
 .profile_pic{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     clip-path: circle(50%);
     object-fit: cover;
 }
