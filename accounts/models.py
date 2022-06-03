@@ -35,6 +35,7 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
+    # gender, dob, address, emergency contact
     # add phone number to update profile
     username = None
     email = models.EmailField(db_index=True, unique=True, null=True, blank=True)
@@ -64,7 +65,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     # @property
     # def is_staff(self):
     #     return self.is_staff
-    
+
+
+# Preferences
+# # Language
+# # Currency
+# # Timzone
+
 
 
 # class UserProfile(models.Model):

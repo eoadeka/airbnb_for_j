@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Login extends Component{
     constructor(props){
@@ -75,13 +76,28 @@ export default class Login extends Component{
 
                 {/* <h1>Login</h1>  */}
                 { loading === false && (
-                    <form onSubmit={this.handleSubmit}>
-                        <input type="email" value={email} onChange={this.handleChange} name="email" placeholder="Email"></input>
+                    <Fragment>
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="email" value={email} onChange={this.handleChange} name="email" placeholder="Email"></input>
+                            <br></br>
+                            <input type="password" value={password} onChange={this.handleChange} name="password" placeholder="Password"></input>
+                            <br></br>
+                                {/* <a href="http://127.0.0.1:8000/tight/password/reset/">Forgot Password?</a>
+                                <br></br>
+                                <a href="http://127.0.0.1:8000/api/v1/users/dj-rest-auth/password/change/">Forgot Password?</a> */}
+                                <Link to={{ pathname: '/password-reset' }}>Forgot Password?</Link>
+                            <button type="submit">Login</button>
+                        </form>
+
                         <br></br>
-                        <input type="password" value={password} onChange={this.handleChange} name="password" placeholder="Password"></input>
+
+                        <h3>Or signup with</h3>  
+                        <a href="http://127.0.0.1:8000/tight/facebook/login/?process=login">Facebook</a>
                         <br></br>
-                        <button type="submit">Login</button>
-                    </form>
+                        <a href="http://127.0.0.1:8000/dj-rest-auth/google/?process=login">Google</a>
+                        <br></br>
+                        <a href="http://127.0.0.1:8000/dj-rest-auth/twitter/?process=login">Twitter</a>
+                    </Fragment>                  
                 )}
             </div>
         )

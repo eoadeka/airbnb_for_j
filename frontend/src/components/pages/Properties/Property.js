@@ -59,10 +59,13 @@ import { withUrlParams } from "../../../utils/urlParams";
                     <div key={property.id}>
                         <h1>{property.title}</h1>
                         <img src={property.image} alt={property.title} width="100%" height="500px"></img>
-                        <Link to={{ pathname: '/contact'}}><button type="button" style={{ position: "absolute", zIndex: "-1", top: "-0.5em", right: "0"}}>Enquire Now</button></Link>
+                        <Link to={{ pathname: '/contact-us'}}><button type="button" style={{ position: "absolute", zIndex: "-1", top: "-0.5em", right: "0"}}>Enquire Now</button></Link>
                         <p>Type : {property.type}</p>
                         <p>City : {property.city}</p>
                         <p>Price: <strong> £{property.price}</strong> per night</p>
+
+                        <br></br>
+                        <h2>Amenities</h2>
                         <p>Highlights : {property.highlights}</p>
                         <p>Description: {property.description}</p>
                         <p>Bathroom: {property.bathroom.map((bathroom, index) => (
@@ -75,10 +78,8 @@ import { withUrlParams } from "../../../utils/urlParams";
                         {
                             isAuth ?  (
                                 <Fragment>
-                                    <button type="button">Check Availability</button>
-                                    <br></br>
-                                    <br></br>
-                                    <button type="button" >Add to wishlist</button>
+                                    <button type="button"  style={{ margin: "1em"}}>Check Availability </button>
+                                    <button type="button"  style={{ margin: "1em"}}>Add To <br></br> Wishlist</button>
                                 </Fragment>
                             ) : (
                                 <Fragment>
@@ -89,10 +90,10 @@ import { withUrlParams } from "../../../utils/urlParams";
                         }
                         <hr></hr>
                         <br></br>
-                        <h1>Property Images</h1>
+                        <h2>Property Images</h2>
                         <div>{property.property_images.map((property_image, index) => (
-                            <div key={index}>
-                                <img src={property_image.images} alt={property.title} width="200" />
+                            <div key={index} className="property_images">
+                                <img  src={property_image.images} alt={property.title} width="200" />
                             </div>
                         ))}</div>
 
