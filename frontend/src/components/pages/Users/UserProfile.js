@@ -74,7 +74,8 @@ export default class UserProfile extends Component{
                 { loading === false && (
                     <Fragment>
                         <main>
-                            <Link to={{ pathname: `/user/deactivate` }} style={{ position: "absolute", top: "1em", right: "1em"}}>Deactivate</Link>
+                            <Link to={{ pathname: `/user/deactivate` }} style={{ position: "absolute", top: "6em", right: "1.5em"}}>Deactivate</Link>
+                            <Link to={{ pathname: `/user/password-change` }} style={{ position: "absolute", top: "10em", right: "1.5em"}}>Change Password</Link>
                             {/* <h1>User Profile</h1> */}
                             <h1>Hello, {first_name}</h1>
                             <button type="button" onClick={this.showUpdateForm} style={{ position: 'absolute', right: "0"}}>{ formShowing ? 'Edit' : 'Close'}</button>

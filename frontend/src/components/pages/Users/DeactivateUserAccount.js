@@ -46,8 +46,9 @@ export default class DeactivateUserAccount extends Component{
                { loading === false && (
                     <Fragment>
                         {''}
-                        <h6>Sad to see you go, {first_name} :(</h6>
-                        <h4>Reasons?</h4>
+                        {/* <h6>Sad to see you go,{first_name} :(</h6> */}
+                        <h6>Sad to see you go :(</h6>
+                        <h3>{first_name}, tell us your reasons</h3>
                         <p>Don't really like it here :(</p>
                     </Fragment>
                )}
