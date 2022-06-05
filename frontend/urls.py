@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # re_path(r".*", index),
+    path('*', index),
 
     # Admin
     path('loose/admin', index),
@@ -15,7 +16,9 @@ urlpatterns = [
     path('login', index),
     path('logout', index),
     path('signup', index),
-    path('password-reset', index),
+    path('user/password-change', index),
+    path('user/password-reset', index),
+    path('user/password-reset-confirm', index),
 
     # User
     path('user/deactivate', index),
@@ -27,6 +30,7 @@ urlpatterns = [
     path('contact-us', index),
     path('cities', index),
     path('cities/<slug:slug>', index),
+    path('amenities', index),
     path('properties', index),
     path('properties/<str:id>/<slug:slug>', index),
 
