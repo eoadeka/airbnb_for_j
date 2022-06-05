@@ -44,18 +44,16 @@ INSTALLED_APPS = [
     
     # corsheaders
     'corsheaders',
-
-   
     
     # social login
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'django.contrib.sites',
     
     # the social providers
+    'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.twitter',

@@ -37,7 +37,7 @@ export default class Properties extends Component{
         // const { propertyImagesList } = this.state;
         return(
             <div className="properties_body">
-                <p>Properties</p>
+                {/* <h1>Properties</h1> */}
                 <br></br>
                 <div>
                     {propertiesList.map((property, index) => (
