@@ -88,7 +88,7 @@ h3, h4 {
   font-family: 'Syne', sans-serif;
 }
 
-p, li, input, label, button {
+p, li, input, label, button, a {
   font-family: 'Fahkwang', sans-serif;
 }
 
@@ -112,6 +112,16 @@ img {
      object-fit: cover;
 }
 
+.nav_pic {
+  width: 40px;
+  height: 40px;
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-top: -0.5em;
+}
+
 input, button {
   border: 1px solid pink;
   padding: 1.5em;
@@ -130,6 +140,7 @@ input:hover, button:hover {
   background: pink;
   padding: 1em;
   font-family: 'Fahkwang', sans-serif;
+  cursor: pointer;
 }
 
 input[type="file"] {
@@ -141,5 +152,46 @@ button {
   background-color: pink;
   width: 150px;
   height: 90px;
+}
+
+nav {
+  height: 100%;
+}
+
+nav ul {
+  padding: 2em 0;
+}
+
+nav ul li {
+  display: inline;
+  list-style: none;
+  margin-right: 2em;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+nav ul li:nth-child(1) {
+  margin-left: 2em;
+}
+
+nav ul li:nth-child(6) {
+  position: absolute;
+  right: 4em;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+}
+
+nav ul li:nth-child(6) span {
+  display: inline-block;
+  vertical-align: top;
+}
+
+nav ul li:nth-child(7) {
+  position: absolute;
+  right: 0;
 }
 /*# sourceMappingURL=main.css.map */
