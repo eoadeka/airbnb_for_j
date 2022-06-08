@@ -18,6 +18,9 @@ from amenities.models import *
 class CityAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['city']}
 
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('user','property','check_in', 'check_out', 'reserved')
+
 class PropertyImagesAdmin(admin.StackedInline):
     model = PropertyImages
     
@@ -35,6 +38,8 @@ class PropertyCategoryAdmin(admin.ModelAdmin):
     list_display = ('title', )
     empty_value_display = '-empty-'
 
+class ReviewsAdmin(admin.ModelAdmin):
+    list_display = ('user','property', 'title', 'created_at')
 # Register your models here.
 
 
@@ -44,3 +49,5 @@ admin.site.register(Highlights)
 admin.site.register(PropertyImages, PropertyImagesAdmin)
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(PropertyCategory, PropertyCategoryAdmin)
+admin.site.register(Booking, BookingAdmin)
+admin.site.register(Reviews, ReviewsAdmin)
