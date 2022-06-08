@@ -43,7 +43,7 @@ export default class Properties extends Component{
                     {propertiesList.map((property, index) => (
                         
                         <div key={index}>
-                            <Link to={{ pathname: `/properties/${property.id}/${property.slug}` }}>
+                            <Link to={{ pathname: `/properties/${property.slug}-0${property.id}` }}>
                                 <h2>{property.title}</h2>
                                 <img src={property.image} alt={property.title} width="200"></img>
                                 <p>{property.type}</p>
