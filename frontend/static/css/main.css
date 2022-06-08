@@ -194,4 +194,12 @@ nav ul li:nth-child(7) {
   position: absolute;
   right: 0;
 }
+
+.amenities {
+  padding: 1em 0 5em 3em;
+}
+
+.amenities li {
+  list-style-type: circle;
+}
 /*# sourceMappingURL=main.css.map */
