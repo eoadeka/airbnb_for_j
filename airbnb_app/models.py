@@ -1,5 +1,6 @@
 from django.db import models
 # from django.forms import SlugField
+from accounts.models import *
 from amenities.models import *
 
 # TESTING with coverage
@@ -121,19 +122,20 @@ class PropertyImages(models.Model):
 
 # ------------------------ BOOKING --------------------------------
 class Booking(models.Model):
-    # user
-    # property_name = models.ManyToManyField(Property)
-    property_name = models.CharField(max_length=250)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default="", null=True)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, default="", null=True)
     check_in = models.DateField()
     check_out = models.DateField()
     no_of_beds = models.IntegerField()
     no_of_guests = models.IntegerField()
+    booking_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    reserved = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'Bookings'
 
     def __str__(self):
-        return self.property_name
+        return self.user.email
 # ----------------------- END OF BOOKING --------------------------
 
 
@@ -143,11 +145,15 @@ class Booking(models.Model):
 
 # -------------------------- REVIEWS -----------------------------
 class Reviews(models.Model):
-    # user
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="", null=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
+    title = models.CharField(max_length=150, default='')
     review = models.TextField()
 
     class Meta:
         verbose_name_plural = 'Reviews'
+
+    def __str__(self):
+        return self.user.email
 # ----------------------- END OF REVIEWS -----------------------
