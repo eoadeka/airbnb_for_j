@@ -63,7 +63,6 @@ export default class Login extends Component{
                     })
                     localStorage.clear();
                 }
-                console.log(user)
             });
     }
     
