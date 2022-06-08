@@ -2,9 +2,18 @@ from pickle import NONE
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 # from PIL import Image
 # from django.contrib.auth import get_user_model
 # User = get_user_model()
+
+# Create choices here
+GENDER_CHOICES = (
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ('O', 'Other')
+)
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -35,8 +44,6 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
-    # gender, dob, address, emergency contact
-    # add phone number to update profile
     username = None
     email = models.EmailField(db_index=True, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=255)
@@ -74,16 +81,32 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 
-# class UserProfile(models.Model):
-#     # ondelete=models.SET_NULL : Field will be nullable. If a User is deleted, their comments will be kept
-#     # User object contains username, password, email, first_name, last_name
+class UserProfile(models.Model):
+    # gender, dob, address, emergency contact
+    # add phone number to update profile
+    # ondelete=models.SET_NULL : Field will be nullable. If a User is deleted, their comments will be kept
+    # User object contains username, password, email, first_name, last_name
 
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user", help_text=" ")
-#     profile_picture = models.ImageField(upload_to="images/profile_pics")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="userprofile")
+    # user = models.OneToOneField(User, related_name="userprofile", help_text=" ")
+    # avatar = models.ImageField(default="default.png", upload_to="images/profile_pics")
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=20)
+    dob = models.DateField()
+    address = models.TextField()
 
-#     def __str__(self):
-#         return "{}'s Profile".format(self.user.username)
+    def __str__(self):
+        return "{}'s Profile".format(self.user.username)
 
-#     def save(self):
-#         super().save()
+    def save(self):
+        super().save()
     
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=UserProfile)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
