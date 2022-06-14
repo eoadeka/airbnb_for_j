@@ -48,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(db_index=True, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    avatar = models.ImageField(default="default.png", upload_to="images/profile_pics")
+    # avatar = models.ImageField(default="default.png", upload_to="images/profile_pics")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -81,32 +81,33 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 
-class UserProfile(models.Model):
-    # gender, dob, address, emergency contact
-    # add phone number to update profile
-    # ondelete=models.SET_NULL : Field will be nullable. If a User is deleted, their comments will be kept
-    # User object contains username, password, email, first_name, last_name
+# class UserProfile(models.Model):
+#     # gender, dob, address, emergency contact
+#     # add phone number to update profile
+#     # ondelete=models.SET_NULL : Field will be nullable. If a User is deleted, their comments will be kept
+#     # User object contains username, password, email, first_name, last_name
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="userprofile")
-    # user = models.OneToOneField(User, related_name="userprofile", help_text=" ")
-    # avatar = models.ImageField(default="default.png", upload_to="images/profile_pics")
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=20)
-    dob = models.DateField()
-    address = models.TextField()
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="userprofile")
+#     # user = models.OneToOneField(User, related_name="userprofile", help_text=" ")
+#     # avatar = models.ImageField(default="default.png", upload_to="images/profile_pics")
+#     gender = models.CharField(choices=GENDER_CHOICES, max_length=20)
+#     dob = models.DateField()
+#     address = models.TextField()
+#     # email_verified
 
-    def __str__(self):
-        return "{}'s Profile".format(self.user.username)
+#     def __str__(self):
+#         return "{}'s Profile".format(self.user.username)
 
-    def save(self):
-        super().save()
+#     def save(self):
+#         super().save()
     
 
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)
 
-@receiver(post_save, sender=UserProfile)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+# @receiver(post_save, sender=UserProfile)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
