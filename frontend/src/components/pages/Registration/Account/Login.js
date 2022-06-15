@@ -85,7 +85,7 @@ export default class Login extends Component{
                                 {/* <a href="http://127.0.0.1:8000/tight/password/reset/">Forgot Password?</a>
                                 <br></br>
                                 <a href="http://127.0.0.1:8000/api/v1/users/dj-rest-auth/password/change/">Forgot Password?</a> */}
-                                <Link to={{ pathname: '/password-reset' }} style={{ marginRight: "2em"}}>Forgot Password?</Link>
+                                <Link to={{ pathname: '/user/password-reset' }} style={{ marginRight: "2em"}}>Forgot Password?</Link>
                             <button type="submit">Login</button>
                         </form>
                         

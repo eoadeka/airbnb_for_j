@@ -40,7 +40,7 @@ class City extends Component{
                         <h1>{city.city}</h1>
                         {properties.filter((property) => city.city == property.city).map(property => (
                             <div key={property.id}>
-                                <Link to={{ pathname: `/properties/${property.slug}-0${property.id}`}}>
+                                <Link to={{ pathname: `/properties/${property.slug}/${property.id}`}}>
                                     <h2>{property.title}</h2>
                                     <img src={property.image} alt={property.title} width="200"></img>
                                     <p><strong> £{property.price}</strong></p>
