@@ -20,6 +20,9 @@ router.register(r'auth/register', RegistrationViewSet, basename='auth-register')
 router.register(r'auth/refresh', RefreshViewSet, basename='auth-refresh')
 
 
+# bookings
+router.register(r'bookings', airbnb_app.BookingsView, 'booking')
+
 # cities
 router.register(r'cities', airbnb_app.CitiesView, 'city')
 
