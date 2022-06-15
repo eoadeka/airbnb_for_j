@@ -80,6 +80,8 @@ class Property(models.Model):
     location = models.TextField()
     highlights = models.ManyToManyField(Highlights, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    max_days = models.IntegerField(default=1)
+    max_guests = models.IntegerField(default=1)
     date_added = models.DateTimeField(auto_now=False,auto_now_add=True)
     is_available = models.BooleanField(default=True)
     
@@ -128,8 +130,7 @@ class Booking(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, default="", null=True)
     check_in = models.DateField()
     check_out = models.DateField()
-    no_of_beds = models.IntegerField(default=1)
-    no_of_guests = models.IntegerField(default=1)
+    guests = models.IntegerField(default=1)
     booking_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     reserved = models.BooleanField(default=False)
 
