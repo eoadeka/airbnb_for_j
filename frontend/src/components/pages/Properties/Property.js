@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from "react";
-import {  Link } from "react-router-dom";
+import {  Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { withUrlParams } from "../../../utils/urlParams";
+// import {Box, TextField } from '@mui/material';
+// import { DateRangePicker, DateRange } from "@mui/x-date-pickers";
+// import { DateInput } from "semantic-ui-calendar-react";
+
 
 // import { useParams } from "react-router-dom";
 // import propertiesList from "./Properties";
@@ -26,6 +30,18 @@ import { withUrlParams } from "../../../utils/urlParams";
         }
     }
 
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        window.location.href = 'http://127.0.0.1:8000/payment';
+        Navigate
+    }
+
     async showPropertyItem(){
         // axios
         //     .get('/api/properties')
@@ -47,7 +63,15 @@ import { withUrlParams } from "../../../utils/urlParams";
 
         const   {id}  = this.props.params;
         const {propertyItem, propertyImagesList, isAuth } = this.state;
-        
+        const oneYearFromNow = new Date();
+        oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 2);
+
+        // console.log(oneYearFromNow);
+
+        const currentdate = new Date();
+        const currentYear = currentdate.getFullYear();
+        const maxdate = new Date(currentdate.setYear(currentdate.getFullYear() + 1));
+                
         return(
             <div className="property_body">
 
@@ -86,6 +110,55 @@ import { withUrlParams } from "../../../utils/urlParams";
                             )
                         }
                         <br></br>
+                        
+                        <hr></hr>
+                        <br></br>
+                        <form style={{ display: "inline"}} onSubmit={this.handleSubmit}>
+                            <label htmlFor="check_in">Check-in</label><br></br>
+                            <input type="date" name="check-in" min="2022-06-12" max={maxdate} />
+
+                            <br></br>
+                            <br></br>
+
+                            <label htmlFor="check_out">Check-out</label><br></br>
+                            <input type="date" name="check-out"  min="2022-06-12" max={oneYearFromNow} />
+
+                            {/* <Box>
+                            <DateRangePicker
+                                startText="Check-in"
+                                endText="Check-out"
+                                value={selectedDate}
+                                onChange={date => handleDateChange(date)}
+                                renderInput={(startProps, endProps) => (
+                                    <>
+                                    <TextField {...startProps} />
+                                    <DateRangeDelimiter> to </DateRangeDelimiter>
+                                    <TextField {...endProps} />
+                                    </>
+                                )}
+                                />
+                            </Box> */}
+                            <br></br>
+                            <br></br>
+
+                            <label htmlFor="beds">Beds</label><br></br>
+                            <input type="number" name="beds" min="1" />
+
+                            
+                            <br></br>
+                            <br></br>
+
+                            <label htmlFor="guests">Guests</label><br></br>
+                            <input type="number" name="guests" min="1" />
+
+                            <br></br>
+                            <br></br>
+
+                            <button type="submit">Submit</button>
+
+                            <br></br>
+                            <br></br>
+                        </form>
 
 
                         <hr></hr>
