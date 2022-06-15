@@ -9,7 +9,7 @@ export default class Signup extends Component{
             email: '',
             first_name: '',
             last_name: '',
-            avatar: null,
+            // avatar: null,
             password1: '',
             password2: '',
             errors: false,
@@ -36,17 +36,17 @@ export default class Signup extends Component{
             [event.target.name]: event.target.value,
         });
     }
-    handleImageChange = (event) =>{
-        this.setState({
-            avatar: event.target.files[0]
-        })
-    }
+    // handleImageChange = (event) =>{
+    //     this.setState({
+    //         avatar: event.target.files[0]
+    //     })
+    // }
 
     handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state.avatar);
         const formData = new FormData();
-        formData.append('avatar', this.state.avatar, this.state.avatar.name);
+        // formData.append('avatar', this.state.avatar, this.state.avatar.name);
         formData.append('email',  this.state.email);
         formData.append('first_name',  this.state.first_name);
         formData.append('last_name',  this.state.last_name);
@@ -71,7 +71,7 @@ export default class Signup extends Component{
                         email:'',
                         first_name:'',
                         last_name:'',
-                        avatar: null,
+                        // avatar: null,
                         password1:'',
                         password2:'',
                         errors: true
@@ -116,8 +116,8 @@ export default class Signup extends Component{
                     <br></br>
                     <br></br>
 
-                    <label htmlFor="avatar">Profile Picture</label><br></br>
-                    <input type="file"   id="avatar"  onChange={this.handleImageChange} name="avatar"></input>
+                    {/* <label htmlFor="avatar">Profile Picture</label><br></br>
+                    <input type="file"   id="avatar"  onChange={this.handleImageChange} name="avatar"></input> */}
                    
                     <br></br>
                     <br></br>

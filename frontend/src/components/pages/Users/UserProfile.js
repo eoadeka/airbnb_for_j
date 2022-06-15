@@ -81,7 +81,8 @@ export default class UserProfile extends Component{
                             <button type="button" onClick={this.showUpdateForm} style={{ position: 'absolute', right: "0"}}>{ formShowing ? 'Edit' : 'Close'}</button>
                             <p>Fullname: {this.formatUser(this.state)}</p>
                             <p>Email: {email}</p>
-                            <img src={avatar} alt={first_name} className="profile_pic"></img>
+                            {/* <img src={avatar} alt={first_name} className="profile_pic"></img> */}
+                            <img src="../../static/default.png" alt={first_name} className="profile_pic"></img>
                         </main>   
 
                         <section style={{ position: 'absolute', right: "0", textAlign: "right"}}>
