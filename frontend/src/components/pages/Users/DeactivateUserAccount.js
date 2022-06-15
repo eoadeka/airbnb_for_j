@@ -50,6 +50,8 @@ export default class DeactivateUserAccount extends Component{
                         <h6>Sad to see you go :(</h6>
                         <h3>{first_name}, tell us your reasons</h3>
                         <p>Don't really like it here :(</p>
+                        <br></br>
+                        <button>Deactivate</button>
                     </Fragment>
                )}
             </div>

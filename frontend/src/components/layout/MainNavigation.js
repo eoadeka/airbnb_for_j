@@ -23,7 +23,7 @@ import DeactivateUserAccount from "../pages/Users/DeactivateUserAccount";
 import PasswordReset from "../pages/Registration/Password/PasswordReset";
 import PasswordResetConfirm from "../pages/Registration/Password/PasswordResetConfirm";
 import PasswordChange from "../pages/Registration/Password/PasswordChange";
-import Payment from "../pages/Registration/Payment/Payment";
+import Payment from "../pages/Payment/Payment";
 
 export default class MainNavigation extends Component{
     constructor(props){
