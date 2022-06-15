@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 # from django.forms import SlugField
 from accounts.models import *
 from amenities.models import *
@@ -69,6 +70,7 @@ class PropertyCategory(models.Model):
 
 # price : £100.00 per day
 class Property(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False) 
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     type = models.ForeignKey(PropertyCategory, on_delete=models.CASCADE, related_name='properties')
     image = models.FileField(blank=True, upload_to="images/properties")
@@ -97,7 +99,7 @@ class Property(models.Model):
     services = models.ManyToManyField(Services, blank=True)
 
     class Meta:
-        ordering = ('id',)
+        # ordering = ('id',)
         verbose_name_plural = 'Properties'
     
     def __str__(self):
@@ -126,8 +128,8 @@ class Booking(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, default="", null=True)
     check_in = models.DateField()
     check_out = models.DateField()
-    no_of_beds = models.IntegerField()
-    no_of_guests = models.IntegerField()
+    no_of_beds = models.IntegerField(default=1)
+    no_of_guests = models.IntegerField(default=1)
     booking_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     reserved = models.BooleanField(default=False)
 
