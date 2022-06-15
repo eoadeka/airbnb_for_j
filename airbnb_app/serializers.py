@@ -12,7 +12,10 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields =  '__all__'
 
-
+class BookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
+        fields = '__all__'
 
 class PropertySerializer(serializers.ModelSerializer):
 
@@ -53,6 +56,8 @@ class PropertySerializer(serializers.ModelSerializer):
             'location',
             'highlights',
             'price',
+            'max_days',
+            'max_guests',
             'is_available',
             'attractions',
             'bathroom',
