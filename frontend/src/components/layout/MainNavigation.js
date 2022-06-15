@@ -108,7 +108,8 @@ export default class MainNavigation extends Component{
                                 <Fragment>
                                     {' '}
                                     <li>
-                                        <Link to="/user/profile" className="nav_profile"><span><img src={avatar} alt={first_name} className="nav_pic"></img></span> <span>Profile</span></Link>
+                                        {/* <Link to="/user/profile" className="nav_profile"><span><img src={avatar} alt={first_name} className="nav_pic"></img></span> <span>Profile</span></Link> */}
+                                        <Link to="/user/profile" className="nav_profile"><span><img src="../../static/default.png" alt={first_name} className="nav_pic"></img></span> <span>Profile</span></Link>
                                     </li>
                                     <li>
                                         <Link to="/logout" onClick={this.handleLogout}>Logout</Link>
@@ -148,7 +149,7 @@ export default class MainNavigation extends Component{
                     <Route path="/cities/:slug" element={<City />}></Route>
                     <Route exact path="/amenities" element={<Amenities />}></Route>
                     <Route exact path="/properties" element={<Properties />}></Route>
-                    <Route path="/properties/:slug-:id" element={<Property />}></Route>
+                    <Route path="/properties/:slug/:id" element={<Property />}></Route>
                     <Route exact path="/contact-us" element={<Contact />}></Route>
                     <Route exact path="/about-us" element={<About />}></Route>
                     <Route exact path="/" element={<Home />}></Route>

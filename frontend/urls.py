@@ -32,7 +32,7 @@ urlpatterns = [
     path('cities/<slug:slug>', index),
     path('amenities', index),
     path('properties', index),
-    path('properties/<slug:slug>-0<str:id>', index),
+    path('properties/<slug:slug>/<str:id>', index),
 
     path('payment', index),
 
