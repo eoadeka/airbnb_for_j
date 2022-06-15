@@ -154,6 +154,15 @@ button {
   height: 90px;
 }
 
+div.react-datepicker-wrapper {
+  width: 50%;
+  margin: -32px;
+}
+
+div.react-datepicker-wrapper .react-datepicker__input-container {
+  width: 20%;
+}
+
 nav {
   height: 100%;
 }
