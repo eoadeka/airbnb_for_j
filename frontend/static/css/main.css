@@ -186,7 +186,7 @@ nav ul li:nth-child(1) {
   margin-left: 2em;
 }
 
-nav ul li:nth-child(6) {
+nav ul li:nth-child(8) {
   position: absolute;
   right: 4em;
   width: 100px;
@@ -194,12 +194,12 @@ nav ul li:nth-child(6) {
   text-align: center;
 }
 
-nav ul li:nth-child(6) span {
+nav ul li:nth-child(8) span {
   display: inline-block;
   vertical-align: top;
 }
 
-nav ul li:nth-child(7) {
+nav ul li:nth-child(9) {
   position: absolute;
   right: 0;
 }
