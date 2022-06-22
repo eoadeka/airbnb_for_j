@@ -50,6 +50,10 @@ export default class PasswordChange extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
 
+        if (this.state.password == this.state.old_password && this.state.old_password !== this.state.new_password1 && this.state.old_password != this.state.new_password2) {
+            return;
+        }
+
         const passwords = {
             old_password: this.state.old_password,
             new_password1: this.state.new_password1,
