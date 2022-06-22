@@ -48,7 +48,7 @@ export default class Properties extends Component{
                                 <img src={property.image} alt={property.title} width="200"></img>
                                 <p>{property.type}</p>
                                 <p>{property.location}</p>
-                                <p><strong> £{property.price}</strong></p>
+                                <p><strong> {property.price.toLocaleString("en-GB", {style:"currency", currency:"GBP"})}</strong></p>
                                 <br></br>
                             </Link>
                             

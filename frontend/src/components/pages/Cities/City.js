@@ -43,7 +43,7 @@ class City extends Component{
                                 <Link to={{ pathname: `/properties/${property.slug}/${property.id}`}}>
                                     <h2>{property.title}</h2>
                                     <img src={property.image} alt={property.title} width="200"></img>
-                                    <p><strong> £{property.price}</strong></p>
+                                    <p><strong> {property.price.toLocaleString("en-GB", {style:"currency", currency:"GBP"})}</strong></p>
                                     <br></br>
                                 </Link>
                                 <hr></hr>
