@@ -80,7 +80,7 @@ class Property(models.Model):
     location = models.TextField()
     highlights = models.ManyToManyField(Highlights, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    max_days = models.IntegerField(default=1)
+    min_days = models.IntegerField(default=1)
     max_guests = models.IntegerField(default=1)
     date_added = models.DateTimeField(auto_now=False,auto_now_add=True)
     is_available = models.BooleanField(default=True)
@@ -126,23 +126,49 @@ class PropertyImages(models.Model):
 
 # ------------------------ BOOKING --------------------------------
 class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('Booked', 'Booked'),
+        ('Confirmed', 'Confirmed'),
+        ('Cancelled', 'Cancelled'),
+    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, default="", null=True)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, default="", null=True)
     check_in = models.DateField()
     check_out = models.DateField()
     guests = models.IntegerField(default=1)
+    # arrival_time = models.TimeField(auto_now_add=True)
     booking_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     reserved = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'Bookings'
 
-    def __str__(self):
-        return self.user.email
+    def get_property_image(self):
+        return self.property.image.url
+
+    def get_property_title(self):
+        return self.property.title
+
+    def get_property_price(self):
+        return self.property.price
+
+    def date_diff(self):
+        days =  (self.check_out - self.check_in).days
+        return days
+
+    def get_total(self):
+        total = self.property.price * self.date_diff()
+        return total
 # ----------------------- END OF BOOKING --------------------------
 
-
-
+# -----------------------  PAYMENT --------------------------
+# class Payment(models.Model):
+#     # Choices: Succesful and unsuccessful
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, default="", null=True)
+#     booking = models.ForeignKey(Booking, on_delete=models.CASCADE, default="", null=True)
+#     total_amount = models.FloatField()
+#     date_paid = models.DateTimeField(auto_now_add=True)
+# ----------------------- END OF PAYMRNY --------------------------
 
 
 
