@@ -1,6 +1,9 @@
 # serializers are used to convert model instances to JSON, 
 # so that the frontend can work with the received data.
+from dataclasses import field
+from django.forms import DateTimeField
 from rest_framework import serializers
+from django.core.exceptions import ObjectDoesNotExist
 from .models import *
 from amenities.models import *
 
@@ -13,11 +16,46 @@ class CitySerializer(serializers.ModelSerializer):
         fields =  '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
+    check_in = serializers.DateTimeField(format="%Y-%m-%d")
+    check_out = serializers.DateTimeField(format="%Y-%m-%d")
     class Meta:
         model = Booking
         fields = '__all__'
+        fields = [
+            'id',
+            'user',
+            'property',
+            'get_property_title',
+            'get_property_image',
+            'get_property_price',
+            'check_in',
+            'check_out',
+            'guests',
+            'booking_date',
+            'reserved',
+            'date_diff',
+            'get_total'
+        ]
+
+    
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return Booking.objects.create(**validated_data)
+
+    # def update(self, instance, validated_data):
+    #     instance.user = validated_data.get('title', instance.title)
+    #     instance.property = validated_data.get('property', instance.property)
+    #     instance.check_in = validated_data.get('check_in', instance.check_in)
+
+    #     instance.save()
+    #     return instance
+
 
 class PropertySerializer(serializers.ModelSerializer):
+
+    price = serializers.FloatField()
 
     # city = serializers.StringRelatedField(many=False)
     city = serializers.SlugRelatedField(many=False, slug_field='city', queryset=City.objects.all())
@@ -56,7 +94,7 @@ class PropertySerializer(serializers.ModelSerializer):
             'location',
             'highlights',
             'price',
-            'max_days',
+            'min_days',
             'max_guests',
             'is_available',
             'attractions',
