@@ -34,7 +34,10 @@ urlpatterns = [
     path('properties', index),
     path('properties/<slug:slug>/<str:id>', index),
 
-    path('payment', index),
+    path('payment/', index),
+    path('payment/confirmation', index),
+    path('cancel-reservation/', index),
+    # path('payment/<str:user_id>/<str:property_id>', index),
 
    
 ]

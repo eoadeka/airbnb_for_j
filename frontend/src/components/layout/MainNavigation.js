@@ -23,7 +23,9 @@ import DeactivateUserAccount from "../pages/Users/DeactivateUserAccount";
 import PasswordReset from "../pages/Registration/Password/PasswordReset";
 import PasswordResetConfirm from "../pages/Registration/Password/PasswordResetConfirm";
 import PasswordChange from "../pages/Registration/Password/PasswordChange";
-import Payment from "../pages/Payment/Payment";
+import Payment from "../pages/Reservation/Payment";
+import CancelReservation from "../pages/Reservation/CancelReservation";
+import PaymentConfirmation from "../pages/Reservation/PaymentConfirmation";
 
 export default class MainNavigation extends Component{
     constructor(props){
@@ -99,10 +101,13 @@ export default class MainNavigation extends Component{
                             <li>
                                 <Link to="/properties">Properties</Link>
                             </li>
+                            <li>
+                                <Link to="/payment">Reservation</Link>
+                            </li>
 
-                            {/* <li>
+                            <li>
                                 <Link to="/loose/admin">Admin</Link>
-                            </li> */}
+                            </li>
 
                             {isAuth === true ? (
                                 <Fragment>
@@ -133,7 +138,9 @@ export default class MainNavigation extends Component{
                 <Routes>
                     <Route exact path="/loose/admin" element={<Admin />}></Route>
                     
-                    <Route exact path="/payment" element={<Payment />}></Route>
+                    <Route exact path="/payment/" element={<Payment />}></Route>
+                    <Route exact path="/payment/confirmation" element={<PaymentConfirmation />}></Route>
+                    <Route exact path="/cancel-reservation/" element={<CancelReservation />}></Route>
 
                     {/* <Route exact path="/logout" element={<Logout/>}></Route> */}
                     <Route exact path="/login" element={<Login />}></Route>
