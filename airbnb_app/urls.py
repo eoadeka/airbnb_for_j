@@ -21,5 +21,8 @@ from .views import *
 urlpatterns = [
     path('', main),
     path('home', main),
-    path('cities', CitiesAPIView.as_view())
+    path('cities', CitiesAPIView.as_view()),
+    # path('booking/<user>', BookingList.as_view()),
+    path('booking/<int:user>', BookingList.as_view()),
+    # path('book/', BookingCreateApiView.as_view()),
 ]
