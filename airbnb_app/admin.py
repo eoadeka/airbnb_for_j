@@ -19,7 +19,7 @@ class CityAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['city']}
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('user','property','check_in', 'check_out', 'reserved')
+    list_display = ('user','property','check_in', 'check_out', 'guests', 'reserved')
 
 class PropertyImagesAdmin(admin.StackedInline):
     model = PropertyImages
