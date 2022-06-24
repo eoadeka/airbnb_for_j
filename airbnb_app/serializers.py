@@ -15,12 +15,20 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields =  '__all__'
 
+class PaymentSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+    booking = serializers.StringRelatedField()
+
+    class Meta:
+        model = Payment
+        fields =  '__all__'
+
 class BookingSerializer(serializers.ModelSerializer):
     check_in = serializers.DateTimeField(format="%Y-%m-%d")
     check_out = serializers.DateTimeField(format="%Y-%m-%d")
     class Meta:
         model = Booking
-        fields = '__all__'
+        # fields = '__all__'
         fields = [
             'id',
             'user',
