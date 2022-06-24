@@ -143,6 +143,9 @@ class Booking(models.Model):
     class Meta:
         verbose_name_plural = 'Bookings'
 
+    def __str__(self):
+        return "{} - {}".format(self.user.email,self.property.title)
+
     def get_property_image(self):
         return self.property.image.url
 
@@ -162,12 +165,16 @@ class Booking(models.Model):
 # ----------------------- END OF BOOKING --------------------------
 
 # -----------------------  PAYMENT --------------------------
-# class Payment(models.Model):
-#     # Choices: Succesful and unsuccessful
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, default="", null=True)
-#     booking = models.ForeignKey(Booking, on_delete=models.CASCADE, default="", null=True)
-#     total_amount = models.FloatField()
-#     date_paid = models.DateTimeField(auto_now_add=True)
+class Payment(models.Model):
+    # Choices: Succesful and unsuccessful
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="", null=True)
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, default="", null=True)
+    total_amount = models.FloatField()
+    date_paid = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "Payment for {} by {}".format(self.booking.property.title,self.user.email)
+
 # ----------------------- END OF PAYMRNY --------------------------
 
 
