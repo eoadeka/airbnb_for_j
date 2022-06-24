@@ -21,6 +21,9 @@ class CityAdmin(admin.ModelAdmin):
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('user','property','check_in', 'check_out', 'guests', 'reserved')
 
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('user','booking', 'total_amount')
+
 class PropertyImagesAdmin(admin.StackedInline):
     model = PropertyImages
     
@@ -44,10 +47,11 @@ class ReviewsAdmin(admin.ModelAdmin):
 
 
 
+admin.site.register(Booking, BookingAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Highlights)
-admin.site.register(PropertyImages, PropertyImagesAdmin)
+admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(PropertyCategory, PropertyCategoryAdmin)
-admin.site.register(Booking, BookingAdmin)
+admin.site.register(PropertyImages, PropertyImagesAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
