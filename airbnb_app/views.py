@@ -6,7 +6,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
-from .serializers import BookingSerializer, CitySerializer, PropertySerializer, PropertyImagesSerializer
+from .serializers import BookingSerializer, CitySerializer,PaymentSerializer, PropertySerializer, PropertyImagesSerializer
 from .models import *
 from amenities.models import *
 from rest_framework.decorators import api_view
@@ -20,6 +20,11 @@ def main(request):
     return HttpResponse("<h1>Airbnb Django app</h1>")
 
 # @api_view(['POST'])
+class PaymentsView(viewsets.ModelViewSet):
+    # permission_classes = [IsAdminUser]
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
+
 class BookingsView(viewsets.ModelViewSet):
     # permission_classes = [IsAdminUser]
     serializer_class = BookingSerializer
